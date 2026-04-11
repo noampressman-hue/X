@@ -42,6 +42,11 @@
             <span class="status-dot"></span>
             <span>ONLINE</span>
         </div>
+        <div class="burger-menu" onclick="toggleMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
     </nav>
 
     <!-- HERO SECTION -->
@@ -652,6 +657,23 @@
             slider.addEventListener('mouseenter', stopAutoSlide);
             slider.addEventListener('mouseleave', () => setTimeout(startAutoSlide, 1000));
         })();
+
+        // Мобильное меню
+        function toggleMenu() {
+            const burger = document.querySelector('.burger-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            burger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Закрыть меню при клике на ссылку
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
     </script>
 
 </body>
