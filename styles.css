@@ -2182,26 +2182,30 @@ body {
         position: relative;
     }
 
-    /* Сравнение — статичные карточки без анимации */
-    .comparison-card,
+    /* Сравнение — ПОЛНОСТЬЮ СТАТИЧНЫЕ карточки без анимации */
+    .comparison-section,
+    .comparison-section *,
+    .comparison-slider,
     .comparison-side,
+    .comparison-card,
     .comparison-card .metric,
     .comparison-card .card-icon,
     .comparison-card h3,
-    .comparison-card .desc {
-        transition: none !important;
+    .comparison-card .desc,
+    .comparison-grid {
         animation: none !important;
+        transition: none !important;
         transform: none !important;
+        -webkit-animation: none !important;
+        -webkit-transition: none !important;
+        -webkit-transform: none !important;
     }
 
-    .comparison-card:hover {
+    .comparison-card:hover,
+    .comparison-card:active {
         transform: none !important;
         box-shadow: none !important;
-    }
-
-    /* Убираем все анимации в секции сравнения */
-    .comparison-section * {
-        animation: none !important;
+        transition: none !important;
     }
 
     .comparison-slider-container {
@@ -2245,6 +2249,17 @@ body {
 }
 
 @media (max-width: 480px) {
+
+    /* Сравнение — статичные карточки даже на маленьких экранах */
+    .comparison-section,
+    .comparison-section *,
+    .comparison-card,
+    .comparison-card .metric {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+
     .contact-section {
         padding: 3rem 1rem;
         padding-bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom)));
