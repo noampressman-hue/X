@@ -2184,8 +2184,14 @@ body {
 
     /* Сравнение — статичные карточки без анимации */
     .comparison-card,
-    .comparison-side {
+    .comparison-side,
+    .comparison-card .metric,
+    .comparison-card .card-icon,
+    .comparison-card h3,
+    .comparison-card .desc {
         transition: none !important;
+        animation: none !important;
+        transform: none !important;
     }
 
     .comparison-card:hover {
@@ -2193,8 +2199,8 @@ body {
         box-shadow: none !important;
     }
 
-    /* Убираем пульсацию hint */
-    .slider-hint {
+    /* Убираем все анимации в секции сравнения */
+    .comparison-section * {
         animation: none !important;
     }
 
@@ -2232,11 +2238,9 @@ body {
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Toast — не перекрывает интерактив */
+    /* Toast — скрываем на мобильном, так как перекрывает контент */
     .privacy-toast {
-        z-index: 2500;
-        pointer-events: auto;
-        bottom: max(1rem, calc(1rem + env(safe-area-inset-bottom)));
+        display: none !important;
     }
 }
 
