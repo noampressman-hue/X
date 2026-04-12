@@ -768,6 +768,10 @@
 
             if (!slider || !divider) return;
 
+            // Проверка: мобильное устройство — отключаем слайдер
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) return; // На мобильных используем табы, слайдер не нужен
+
             let isDragging = false;
             let autoSlideInterval;
             let currentPosition = 50; // Начальная позиция 50%

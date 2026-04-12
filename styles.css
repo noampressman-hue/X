@@ -2186,26 +2186,41 @@ body {
     .comparison-section,
     .comparison-section *,
     .comparison-slider,
+    .comparison-slider *,
     .comparison-side,
+    .comparison-side *,
     .comparison-card,
+    .comparison-card *,
     .comparison-card .metric,
     .comparison-card .card-icon,
     .comparison-card h3,
     .comparison-card .desc,
-    .comparison-grid {
+    .comparison-grid,
+    .comparison-grid *,
+    .slider-handle,
+    .slider-hint,
+    .side-label {
         animation: none !important;
-        transition: none !important;
-        transform: none !important;
         -webkit-animation: none !important;
+        transition: none !important;
         -webkit-transition: none !important;
+        transform: none !important;
         -webkit-transform: none !important;
     }
 
     .comparison-card:hover,
-    .comparison-card:active {
+    .comparison-card:active,
+    .comparison-side:hover,
+    .slider-handle:hover {
         transform: none !important;
         box-shadow: none !important;
         transition: none !important;
+    }
+
+    /* Скрываем divider и hint на мобильных */
+    .slider-divider,
+    .slider-hint {
+        display: none !important;
     }
 
     .comparison-slider-container {
