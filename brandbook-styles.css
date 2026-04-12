@@ -393,21 +393,107 @@ body {
     }
 }
 
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .branding h1 {
+        font-size: 4rem;
+    }
+
+    .x-mark {
+        font-size: 15rem;
+    }
+
+    .page-break {
+        padding: 4rem 3rem;
+    }
+
+    .section-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .lead {
+        font-size: 2rem;
+    }
+
+    .columns-2 {
+        column-gap: 2rem;
+    }
+
+    .logo-grid {
+        gap: 2rem;
+    }
+
+    .symbol {
+        font-size: 10rem;
+    }
+
+    .color-swatches {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service-list li {
+        gap: 1.5rem;
+    }
+
+    .srv-name {
+        font-size: 1.2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .cover-page {
         padding: 2rem;
+        min-height: 80vh;
     }
 
     .branding h1 {
         font-size: 3rem;
     }
 
+    .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+    }
+
     .x-mark {
         font-size: 10rem;
     }
 
+    .meta-data {
+        position: relative;
+        bottom: auto;
+        margin-top: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .page-break {
+        padding: 3rem 1.5rem;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .decoration-line {
+        width: 60px;
+    }
+
+    .lead {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
     .columns-2 {
         column-count: 1;
+    }
+
+    .columns-2 p {
+        font-size: 0.95rem;
     }
 
     .logo-grid,
@@ -415,7 +501,186 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .logo-display-large {
+        padding: 2rem;
+    }
+
+    .symbol {
+        font-size: 8rem;
+    }
+
+    .caption {
+        font-size: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .logo-rules h3 {
+        font-size: 1.2rem;
+    }
+
     .color-swatches {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .swatch {
+        height: 180px;
+        padding: 0.8rem;
+    }
+
+    .swatch .hex {
+        font-size: 1rem;
+    }
+
+    .font-spec {
+        padding: 1.5rem;
+    }
+
+    .font-name {
+        font-size: 1.5rem;
+    }
+
+    .font-preview {
+        font-size: 1.2rem;
+    }
+
+    .placeholder-img {
+        height: 150px;
+    }
+
+    .visual-card h3 {
+        font-size: 1rem;
+    }
+
+    .count {
+        font-size: 2rem;
+    }
+
+    .srv-name {
+        font-size: 1rem;
+    }
+
+    .service-list li {
+        padding: 1.5rem 0;
+        gap: 1rem;
+    }
+
+    .giant-text {
+        font-size: 10rem;
+    }
+
+    .footer-page p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cover-page {
+        padding: 1.5rem;
+        min-height: 70vh;
+    }
+
+    .branding h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.75rem;
+    }
+
+    .x-mark {
+        font-size: 6rem;
+    }
+
+    .meta-data {
+        font-size: 0.7rem;
+    }
+
+    .page-break {
+        padding: 2rem 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .lead {
+        font-size: 1.2rem;
+    }
+
+    .columns-2 p {
+        font-size: 0.9rem;
+    }
+
+    .logo-display-large {
+        padding: 1.5rem;
+    }
+
+    .symbol {
+        font-size: 5rem;
+    }
+
+    .color-swatches {
+        grid-template-columns: 1fr;
+    }
+
+    .swatch {
+        height: 150px;
+    }
+
+    .font-spec {
+        padding: 1rem;
+    }
+
+    .font-name {
+        font-size: 1.2rem;
+    }
+
+    .font-usage {
+        font-size: 0.75rem;
+    }
+
+    .font-preview {
+        font-size: 1rem;
+    }
+
+    .placeholder-img {
+        height: 120px;
+        font-size: 0.8rem;
+    }
+
+    .visual-card {
+        padding: 1rem;
+    }
+
+    .visual-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .count {
+        font-size: 1.5rem;
+    }
+
+    .service-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1.2rem 0;
+    }
+
+    .srv-name {
+        font-size: 0.9rem;
+    }
+
+    .giant-text {
+        font-size: 6rem;
+    }
+
+    .footer-page p {
+        font-size: 1rem;
+    }
+
+    .contact-info p {
+        font-size: 0.85rem;
     }
 }

@@ -42,11 +42,11 @@
             <span class="status-dot"></span>
             <span>ONLINE</span>
         </div>
-        <div class="burger-menu" onclick="toggleMenu()">
-            <div class="burger-line"></div>
-            <div class="burger-line"></div>
-            <div class="burger-line"></div>
-        </div>
+        <button class="burger-menu" aria-label="Открыть меню">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
     </nav>
 
     <!-- HERO SECTION -->
@@ -384,6 +384,39 @@
     </div>
 
     <script>
+        // ===== BURGER MENU =====
+        (function () {
+            const burger = document.querySelector('.burger-menu');
+            const nav = document.querySelector('.main-nav');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (burger && navLinks) {
+                burger.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    nav.classList.toggle('mobile-open');
+                });
+
+                // Закрыть меню при клике на ссылку
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        nav.classList.remove('mobile-open');
+                    });
+                });
+
+                // Закрыть меню при клике вне его
+                document.addEventListener('click', function (e) {
+                    if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        nav.classList.remove('mobile-open');
+                    }
+                });
+            }
+        })();
+
         // Данные кейсов
         const casesData = {
             1: {
@@ -657,23 +690,6 @@
             slider.addEventListener('mouseenter', stopAutoSlide);
             slider.addEventListener('mouseleave', () => setTimeout(startAutoSlide, 1000));
         })();
-
-        // Мобильное меню
-        function toggleMenu() {
-            const burger = document.querySelector('.burger-menu');
-            const navLinks = document.querySelector('.nav-links');
-            
-            burger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            
-            // Закрыть меню при клике на ссылку
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    burger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
-            });
-        }
     </script>
 
 </body>
