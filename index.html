@@ -129,6 +129,12 @@
 
         <!-- Интерактивный слайдер сравнения -->
         <div class="comparison-slider-container">
+            <!-- Кнопки переключения для мобильных -->
+            <div class="comparison-tabs">
+                <button class="tab-btn active" data-tab="without">БЕЗ_НАС</button>
+                <button class="tab-btn" data-tab="with">С_НАМИ</button>
+            </div>
+
             <div class="comparison-slider">
                 <!-- ЛЕВАЯ СТОРОНА (БЕЗ НАС) -->
                 <div class="comparison-side left-side">
@@ -689,6 +695,31 @@
             // Остановить при наведении
             slider.addEventListener('mouseenter', stopAutoSlide);
             slider.addEventListener('mouseleave', () => setTimeout(startAutoSlide, 1000));
+        })();
+
+        // ===== COMPARISON TABS (для мобильных) =====
+        (function () {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const sliderContainer = document.querySelector('.comparison-slider-container');
+
+            if (tabBtns.length && sliderContainer) {
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        // Убрать active у всех
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        // Добавить active на текущую
+                        this.classList.add('active');
+
+                        // Переключить видимость
+                        const tab = this.getAttribute('data-tab');
+                        if (tab === 'with') {
+                            sliderContainer.classList.add('showing-with');
+                        } else {
+                            sliderContainer.classList.remove('showing-with');
+                        }
+                    });
+                });
+            }
         })();
     </script>
 
