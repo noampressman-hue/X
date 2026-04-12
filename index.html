@@ -346,19 +346,44 @@
                 покажем возможности AI генерации в действии.
             </p>
             <div class="contact-info">
-                <div class="contact-item">
+                <div class="contact-item contact-email">
                     <div class="contact-label">EMAIL</div>
-                    <div class="contact-value">noam.pressman@gmail.com</div>
+                    <div class="contact-value"></div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item contact-telegram">
                     <div class="contact-label">TELEGRAM</div>
-                    <div class="contact-value">@NOAMPRESSMAN</div>
+                    <div class="contact-value"></div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item contact-location">
                     <div class="contact-label">LOCATION</div>
-                    <div class="contact-value">Moscow, Russia</div>
+                    <div class="contact-value"></div>
                 </div>
             </div>
+
+            <!-- Пользовательское соглашение -->
+            <div class="agreement-block">
+                <button class="agreement-btn" onclick="openAgreementModal(event)">
+                    <span class="agreement-btn-icon">🔒</span>
+                    <span class="agreement-btn-text">Пользовательское соглашение</span>
+                    <span class="agreement-btn-arrow">→</span>
+                </button>
+            </div>
+
+            <!-- Всплывающее уведомление о проверке данных -->
+            <div id="privacyToast" class="privacy-toast">
+                <div class="toast-header">
+                    <span class="toast-icon">🔒</span>
+                    <span class="toast-title">ПРОВЕРКА ДАННЫХ</span>
+                    <button class="toast-close" onclick="closePrivacyToast()">&times;</button>
+                </div>
+                <div class="toast-body">
+                    <p>Мы проверяем и защищаем вашу информацию в соответствии с ФЗ-152 «О персональных данных».</p>
+                    <p>Ваши данные не передаются третьим лицам.</p>
+                    <a href="#" onclick="openAgreementModal(event); closePrivacyToast();">Пользовательское соглашение
+                        →</a>
+                </div>
+            </div>
+
             <a href="mailto:noam.pressman@gmail.com" class="btn-contact">
                 <span class="btn-bracket">[</span>
                 СВЯЗАТЬСЯ_С_НАМИ
@@ -386,6 +411,45 @@
         <div class="modal-content">
             <span class="modal-close" onclick="closeCaseModal()">&times;</span>
             <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОЛЬЗОВАТЕЛЬСКОГО СОГЛАШЕНИЯ -->
+    <div id="agreementModal" class="agreement-modal">
+        <div class="agreement-modal-content">
+            <span class="agreement-close" onclick="closeAgreementModal()">&times;</span>
+            <h2>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</h2>
+
+            <h3>1. Общие положения</h3>
+            <p>Настоящее пользовательское соглашение (далее — «Соглашение») регулирует отношения между Агентством X
+                (далее — «Исполнитель») и пользователем сайта (далее — «Пользователь») по поводу обработки персональных
+                данных и использования сервисов.</p>
+
+            <h3>2. Обработка персональных данных</h3>
+            <p>Оставляя свои контактные данные на сайте, Пользователь даёт согласие на обработку персональных данных в
+                соответствии с Федеральным законом №152-ФЗ «О персональных данных». Исполнитель обязуется использовать
+                полученные данные исключительно для связи с Пользователем по его запросу.</p>
+
+            <h3>3. Цели сбора данных</h3>
+            <p>Персональные данные собираются с целью:</p>
+            <p>— Общения с Пользователем по вопросам проектов;<br>
+                — Предоставления информации об услугах;<br>
+                — Подготовки коммерческих предложений.</p>
+
+            <h3>4. Защита данных</h3>
+            <p>Исполнитель принимает необходимые меры по защите персональных данных Пользователя от неправомерного
+                доступа, изменения, раскрытия или уничтожения. Данные не передаются третьим лицам без согласия
+                Пользователя, за исключением случаев, предусмотренных законодательством РФ.</p>
+
+            <h3>5. Отзыв согласия</h3>
+            <p>Пользователь вправе отозвать согласие на обработку персональных данных, направив соответствующий запрос
+                Исполнителю.</p>
+
+            <div class="agreement-modal-actions">
+                <button class="agreement-accept-btn" onclick="acceptAgreement()">
+                    СОГЛАШАЮСЬ
+                </button>
+            </div>
         </div>
     </div>
 
@@ -422,6 +486,90 @@
                 });
             }
         })();
+
+        // ===== AGREEMENT MODAL =====
+        function openAgreementModal(event) {
+            if (event) event.preventDefault();
+            const modal = document.getElementById('agreementModal');
+            modal.style.display = 'flex';
+            // Небольшая задержка для срабатывания transition
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+            });
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAgreementModal() {
+            const modal = document.getElementById('agreementModal');
+            modal.classList.remove('show');
+            // Ждём окончания анимации перед скрытием
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        function acceptAgreement() {
+            // Отметить чекбокс (если он есть)
+            const checkbox = document.getElementById('agreementCheck');
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+            // Закрыть модалку с анимацией
+            closeAgreementModal();
+            // Показать toast подтверждения
+            showAcceptToast();
+        }
+
+        function showAcceptToast() {
+            const toast = document.getElementById('privacyToast');
+            if (toast) {
+                toast.querySelector('.toast-title').textContent = 'СОГЛАШЕНИЕ ПРИНЯТО ✓';
+                toast.querySelector('.toast-body').innerHTML = '<p>Спасибо! Вы приняли пользовательское соглашение.</p>';
+                toast.classList.add('show');
+                setTimeout(() => {
+                    closePrivacyToast();
+                    // Вернуть стандартный текст toast
+                    setTimeout(() => {
+                        toast.querySelector('.toast-title').textContent = 'ПРОВЕРКА ДАННЫХ';
+                        toast.querySelector('.toast-body').innerHTML = `
+                            <p>Мы проверяем и защищаем вашу информацию в соответствии с ФЗ-152 «О персональных данных».</p>
+                            <p>Ваши данные не передаются третьим лицам.</p>
+                            <a href="#" onclick="openAgreementModal(event); closePrivacyToast();">Пользовательское соглашение →</a>
+                        `;
+                    }, 500);
+                }, 3000);
+            }
+        }
+
+        // ===== PRIVACY TOAST =====
+        let toastTimeout;
+
+        function showPrivacyToast() {
+            const toast = document.getElementById('privacyToast');
+            if (toast) {
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 1500);
+                // Автоматически скрыть через 8 секунд
+                toastTimeout = setTimeout(() => {
+                    closePrivacyToast();
+                }, 9500);
+            }
+        }
+
+        function closePrivacyToast() {
+            const toast = document.getElementById('privacyToast');
+            if (toast) {
+                toast.classList.remove('show');
+            }
+            if (toastTimeout) {
+                clearTimeout(toastTimeout);
+            }
+        }
+
+        // Показать toast при загрузке страницы
+        document.addEventListener('DOMContentLoaded', showPrivacyToast);
 
         // Данные кейсов
         const casesData = {
@@ -585,18 +733,22 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Закрытие по клику вне модального окна
+        // Закрытие по клику вне модального окна и по ESC
         window.onclick = function (event) {
-            const modal = document.getElementById('caseModal');
-            if (event.target === modal) {
+            const caseModal = document.getElementById('caseModal');
+            const agreementModal = document.getElementById('agreementModal');
+            if (event.target === caseModal) {
                 closeCaseModal();
+            }
+            if (event.target === agreementModal) {
+                closeAgreementModal();
             }
         }
 
-        // Закрытие по ESC
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 closeCaseModal();
+                closeAgreementModal();
             }
         });
 

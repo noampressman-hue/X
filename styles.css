@@ -1271,6 +1271,295 @@ body {
     border-top: 2px solid var(--color-dim);
 }
 
+/* AGREEMENT BLOCK */
+.agreement-block {
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.agreement-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.agreement-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transition: left 0.3s ease;
+    z-index: 0;
+}
+
+.agreement-btn:hover::before {
+    left: 0;
+}
+
+.agreement-btn:hover {
+    color: var(--color-primary);
+    border-color: #fff;
+}
+
+.agreement-btn-icon,
+.agreement-btn-text,
+.agreement-btn-arrow {
+    position: relative;
+    z-index: 1;
+}
+
+.agreement-btn-icon {
+    font-size: 1.2rem;
+}
+
+.agreement-btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.agreement-btn:hover .agreement-btn-arrow {
+    transform: translateX(5px);
+}
+
+.agreement-btn:active {
+    transform: scale(0.98);
+}
+
+/* AGREEMENT MODAL */
+.agreement-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.agreement-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.agreement-modal-content {
+    background: #fff;
+    border: 4px solid var(--color-primary);
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 3rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 68, 255, 0.3);
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.agreement-modal.show .agreement-modal-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.agreement-modal-actions {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--color-dim);
+}
+
+.agreement-accept-btn {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    background: var(--color-primary);
+    color: #fff;
+    border: 2px solid var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.agreement-accept-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.agreement-accept-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.agreement-accept-btn:hover {
+    background: transparent;
+    color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(0, 68, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.agreement-accept-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.agreement-modal-content h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+    text-transform: uppercase;
+}
+
+.agreement-modal-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin: 1.5rem 0 1rem;
+    color: var(--color-primary);
+}
+
+.agreement-modal-content p {
+    color: var(--color-dim);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.agreement-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-dim);
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.agreement-close:hover {
+    color: var(--color-primary);
+}
+
+/* PRIVACY TOAST */
+.privacy-toast {
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: #fff;
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 10px 40px rgba(0, 68, 255, 0.3);
+    z-index: 2500;
+    transition: bottom 0.5s ease;
+    border-radius: 0;
+}
+
+.privacy-toast.show {
+    bottom: 2rem;
+}
+
+.toast-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    background: var(--color-primary);
+    color: #fff;
+    position: relative;
+}
+
+.toast-icon {
+    font-size: 1.3rem;
+}
+
+.toast-title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex: 1;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+.toast-body {
+    padding: 1.2rem;
+}
+
+.toast-body p {
+    font-size: 0.85rem;
+    color: var(--color-dim);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+.toast-body a {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: underline;
+}
+
+.toast-body a:hover {
+    text-decoration: none;
+}
+
 /* MODAL RESPONSIVE */
 @media (max-width: 768px) {
     .modal {
@@ -1279,6 +1568,9 @@ body {
 
     .modal-content {
         padding: 2rem;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
     }
 
     .modal-title {
@@ -1298,6 +1590,9 @@ body {
 
     .modal-content {
         padding: 1.5rem;
+        max-height: 95vh;
+        overflow-y: scroll;
+        overscroll-behavior-y: contain;
     }
 
     .modal-close {
@@ -1335,6 +1630,82 @@ body {
     .modal-cta .btn-primary {
         width: 100%;
         text-align: center;
+    }
+
+    .agreement-block {
+        margin: 1.5rem 0;
+        padding: 1rem;
+    }
+
+    .agreement-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .agreement-text {
+        font-size: 0.8rem;
+    }
+
+    .agreement-modal {
+        padding: 0.5rem;
+    }
+
+    .agreement-modal-content {
+        padding: 1.5rem;
+    }
+
+    .agreement-modal-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .agreement-modal-content h3 {
+        font-size: 1rem;
+    }
+
+    .agreement-modal-content p {
+        font-size: 0.85rem;
+    }
+
+    .agreement-close {
+        font-size: 2rem;
+        top: 0.5rem;
+        right: 1rem;
+    }
+
+    .agreement-modal-actions {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+
+    .agreement-accept-btn {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .privacy-toast {
+        width: 95%;
+        max-width: none;
+    }
+
+    .privacy-toast.show {
+        bottom: 1rem;
+    }
+
+    .toast-header {
+        padding: 0.8rem 1rem;
+    }
+
+    .toast-title {
+        font-size: 0.75rem;
+    }
+
+    .toast-body {
+        padding: 1rem;
+    }
+
+    .toast-body p {
+        font-size: 0.8rem;
     }
 }
 
@@ -1573,16 +1944,19 @@ body {
 
     .section-header {
         flex-direction: column;
-        gap: 1rem;
-        margin-bottom: 3rem;
+        gap: 0.8rem;
+        margin-bottom: 2rem;
     }
 
     .section-number {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .section-title {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
+        word-break: break-word;
+        hyphens: auto;
+        line-height: 1.3;
     }
 
     .service-card {
@@ -1696,5 +2070,21 @@ body {
 
     .comparison-card h3 {
         font-size: 0.75rem;
+    }
+
+    /* Убираем анимации и hover-эффекты на телефонах */
+    .comparison-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .service-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .case-card:hover {
+        transform: none;
+        box-shadow: none;
     }
 }
