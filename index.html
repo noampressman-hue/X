@@ -464,24 +464,31 @@
                 burger.addEventListener('click', function () {
                     this.classList.toggle('active');
                     navLinks.classList.toggle('active');
-                    nav.classList.toggle('mobile-open');
+
+                    if (navLinks.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                        document.body.style.touchAction = 'none';
+                    } else {
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
                 });
 
-                // Закрыть меню при клике на ссылку
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', function () {
                         burger.classList.remove('active');
                         navLinks.classList.remove('active');
-                        nav.classList.remove('mobile-open');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
                     });
                 });
 
-                // Закрыть меню при клике вне его
                 document.addEventListener('click', function (e) {
                     if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
                         burger.classList.remove('active');
                         navLinks.classList.remove('active');
-                        nav.classList.remove('mobile-open');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
                     }
                 });
             }
