@@ -17,6 +17,315 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* FAST TRAILER SECTION */
+        .fast-trailer {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .fast-trailer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(0, 68, 255, 0.05) 1px,
+                    rgba(0, 68, 255, 0.05) 2px);
+            pointer-events: none;
+        }
+
+        .fast-trailer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(0, 68, 255, 0.15),
+                    transparent);
+            animation: trailerScan 2s linear infinite;
+        }
+
+        @keyframes trailerScan {
+            0% {
+                left: -60%;
+            }
+
+            100% {
+                left: 160%;
+            }
+        }
+
+        .trailer-phrase {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .phrase-text {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.1;
+            opacity: 0;
+            transform: scale(1.2);
+            transition: all 0.15s ease-out;
+            text-shadow: 0 0 20px rgba(0, 68, 255, 0.6), 0 0 40px rgba(0, 68, 255, 0.3);
+        }
+
+        .phrase-text.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .phrase-text.highlight {
+            color: var(--color-primary);
+            text-shadow: 0 0 30px rgba(0, 68, 255, 0.8), 0 0 60px rgba(0, 68, 255, 0.5);
+        }
+
+        .phrase-text.white {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .phrase-text {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phrase-text {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Trailer video wrapper styling */
+        .trailer-video-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .trailer-video-wrapper video {
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 30px rgba(0, 68, 255, 0.5);
+        }
+
+        .trailer-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .trailer-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        /* Volume Mixer */
+        .volume-mixer {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 68, 255, 0.3);
+            font-family: var(--font-mono);
+        }
+
+        .mixer-label {
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 120px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 68, 255, 0.6);
+            transition: transform 0.2s;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 68, 255, 0.6);
+        }
+
+        .volume-value {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .mute-btn {
+            background: transparent;
+            border: 2px solid rgba(0, 68, 255, 0.5);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .mute-btn:hover {
+            border-color: var(--color-primary);
+            transform: scale(1.1);
+        }
+
+        .mute-btn.muted {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .volume-mixer {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 12px;
+                gap: 8px;
+            }
+
+            .volume-slider {
+                width: 80px;
+            }
+
+            .mixer-label {
+                font-size: 0.65rem;
+            }
+
+            .volume-value {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Recording Overlay */
+        .recording-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .recording-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .rec-dot-large {
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: recBlinkLarge 0.8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4);
+        }
+
+        @keyframes recBlinkLarge {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        .recording-text {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.2em;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        @media (max-width:768px) {
+            .recording-text {
+                font-size: 1.2rem;
+            }
+
+            .rec-dot-large {
+                width: 14px;
+                height: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -41,6 +350,11 @@
         <div class="nav-status">
             <span class="status-dot"></span>
             <span>ONLINE</span>
+        </div>
+        <div class="lang-switcher">
+            <a href="index-en.html" class="lang-btn">EN</a>
+            <a href="index-zh.html" class="lang-btn">中文</a>
+            <span class="lang-btn active">RU</span>
         </div>
         <button class="burger-menu" aria-label="Открыть меню">
             <span class="burger-line"></span>
@@ -107,6 +421,30 @@
         </div>
     </section>
 
+    <!-- FAST PHRASE TRAILER -->
+    <section class="fast-trailer" id="fastTrailer">
+        <div class="trailer-phrase">
+            <span class="phrase-text" id="trailerPhrase"></span>
+        </div>
+        <!-- Recording overlay -->
+        <div class="recording-overlay" id="recordingOverlay">
+            <div class="rec-dot-large"></div>
+            <span class="recording-text">ИДЁТ ЗАПИСЬ...</span>
+        </div>
+        <!-- Audio Volume Mixer -->
+        <div class="volume-mixer" id="volumeMixer">
+            <div class="mixer-label">🔊 АУДИО</div>
+            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+            <span class="volume-value" id="volumeValue">70%</span>
+            <button class="mute-btn" id="muteBtn" aria-label="Mute">🔊</button>
+        </div>
+    </section>
+
+    <!-- Hidden Audio Element -->
+    <audio id="trailerAudio" loop preload="auto">
+        <source src="Lady Gaga - Government Hooker (Super Slowed by Cartnes)_(mp3tornado.net).mp3" type="audio/mpeg">
+    </audio>
+
     <!-- TICKER -->
     <div class="ticker-wrap">
         <div class="ticker">
@@ -119,6 +457,41 @@
             <span class="ticker__item">// DEEPFAKE PRODUCTION</span>
         </div>
     </div>
+
+    <!-- КАК МЫ РАБОТАЕМ -->
+    <section id="process" class="process-section">
+        <div class="section-header">
+            <div class="section-number">00.</div>
+            <h2 class="section-title">ПРОТОКОЛ_ЗАПУСКА</h2>
+        </div>
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>БРИФ</h3>
+                <p>Загружаем задачу в систему. Составляем ТЗ.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>ПРОТОТИП</h3>
+                <p>Генерируем тестовый образец. Согласовываем.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>СОГЛАСОВАНИЕ</h3>
+                <p>Вносим правки. Утверждаем финал.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <h3>ЗАПУСК</h3>
+                <p>Генерируем контент. Доставляем в срок.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">05</div>
+                <h3>ПОДДЕРЖКА</h3>
+                <p>Обновляем, масштабируем, поддерживаем.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- COMPARISON SECTION -->
     <section id="comparison" class="comparison-section">
@@ -337,6 +710,37 @@
         </div>
     </section>
 
+    <!-- ПРИНЦИПЫ РАБОТЫ -->
+    <section id="principles" class="principles-section">
+        <div class="section-header">
+            <div class="section-number">04.</div>
+            <h2 class="section-title">ПРОТОКОЛЫ_БЕЗОПАСНОСТИ</h2>
+        </div>
+
+        <div class="principles-grid">
+            <div class="principle-card">
+                <div class="principle-number">[01]</div>
+                <h3>СОГЛАСИЕ_МОДЕЛИ</h3>
+                <p>Работаем только с согласия правообладателей. Все материалы — легальные и верифицированные.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-number">[02]</div>
+                <h3>NDA_BY_DEFAULT</h3>
+                <p>Конфиденциальность по умолчанию. Договор и NDA — стандартный пакет.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-number">[03]</div>
+                <h3>TRANSPARENCY</h3>
+                <p>Все материалы маркируются как синтетические. Полная прозрачность процессов.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-number">[04]</div>
+                <h3>COMPLIANCE</h3>
+                <p>Работаем в рамках ФЗ-152. Обработка данных — по регламенту.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT SECTION -->
     <section id="contact" class="contact-section">
         <div class="contact-content">
@@ -361,13 +765,6 @@
             </div>
 
             <!-- Пользовательское соглашение -->
-            <div class="agreement-block">
-                <button class="agreement-btn" onclick="openAgreementModal(event)">
-                    <span class="agreement-btn-icon">🔒</span>
-                    <span class="agreement-btn-text">Пользовательское соглашение</span>
-                    <span class="agreement-btn-arrow">→</span>
-                </button>
-            </div>
 
             <!-- Всплывающее уведомление о проверке данных -->
             <div id="privacyToast" class="privacy-toast">
@@ -883,6 +1280,214 @@
                     });
                 });
             }
+        })();
+
+        // ===== FAST TRAILER PHRASE ANIMATION =====
+        (function () {
+            const phrases = [
+                { text: 'МЫ НЕ СОЗДАЁМ\nКОНТЕНТ_\nМЫ ГЕНЕРИРУЕМ\nРЕАЛЬНОСТЬ.', highlight: true, duration: 1200 },
+                { text: 'МЫ, ТЕ КТО ЗНАЕТ:\nИСКУССТВЕННЫЙ ≠ НЕНАСТОЯЩИЙ', highlight: false, duration: 1000 },
+                { text: 'МЫ ТЕ, КТО\nДЕЛАЕТ МАРКЕТИНГ\nНАСТОЯЩИМ', highlight: true, duration: 1200 },
+                { text: 'НОВЫЙ ШАГ\nВ НОВЫЙ МИР\nКОММУНИКАЦИИ', highlight: false, duration: 1200 },
+                { text: 'ОДНО СЛОВО', highlight: false, duration: 700 },
+                { text: 'ОДНА МЫСЛЬ', highlight: false, duration: 700 },
+                { text: 'ОДНО РАЗВИТИЕ', highlight: false, duration: 700 },
+                { text: 'ЧЁТКИЙ ПУТЬ', highlight: true, duration: 1000 },
+                { text: 'ТЫ...', highlight: true, duration: 1200 },
+                { text: 'МОЖЕШЬ СТАТЬ\nКЕМ УГОДНО', highlight: false, duration: 1200 },
+                { text: 'МЫ ДЕЛАЕМ\nТЕБЯ НАСТОЯЩЕГО', highlight: true, duration: 1200 },
+                { text: 'ВЫБОР ЗА ТОБОЙ', highlight: false, duration: 1200 },
+                { text: 'I COULD BE\nEVERYTHING', highlight: true, duration: 1500 },
+            ];
+
+            const videoFiles = [
+                'Firstscen.mp4',
+                'SenondScen.mp4',
+                'thirdscen.mp4',
+                'fourdscen.mp4',
+                'FIFTHSCEN.mp4'
+            ];
+
+            const section = document.getElementById('fastTrailer');
+            const phraseEl = document.getElementById('trailerPhrase');
+            const recordingOverlay = document.getElementById('recordingOverlay');
+            if (!phraseEl || !section) return;
+
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'trailer-video-wrapper';
+            videoWrapper.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.05s;z-index:1;pointer-events:none;';
+            videoWrapper.innerHTML = '<video muted playsinline style="max-width:80%;max-height:80%;object-fit:contain;"></video>';
+            section.appendChild(videoWrapper);
+
+            const videoEl = videoWrapper.querySelector('video');
+
+            let currentIndex = 0;
+            let started = false;
+
+            function showNext() {
+                if (!started) return;
+
+                const phrase = phrases[currentIndex];
+                const isHighlight = phrase.highlight;
+
+                phraseEl.textContent = phrase.text;
+                phraseEl.className = 'phrase-text ' + (isHighlight ? 'highlight' : 'white');
+                void phraseEl.offsetWidth;
+                phraseEl.classList.add('visible');
+
+                videoWrapper.style.opacity = '0';
+
+                setTimeout(() => {
+                    const randomVideo = videoFiles[Math.floor(Math.random() * videoFiles.length)];
+                    videoEl.src = randomVideo;
+                    videoEl.currentTime = 0;
+                    videoEl.play().catch(() => { });
+
+                    phraseEl.classList.remove('visible');
+                    videoWrapper.style.opacity = '1';
+
+                    setTimeout(() => {
+                        videoWrapper.style.opacity = '0';
+                        videoEl.pause();
+
+                        setTimeout(() => {
+                            currentIndex = (currentIndex + 1) % phrases.length;
+                            if (currentIndex === 0) {
+                                setTimeout(() => {
+                                    currentIndex = 0;
+                                    showNext();
+                                }, 2000);
+                            } else {
+                                showNext();
+                            }
+                        }, 200);
+                    }, 300);
+                }, phrase.duration);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !started) {
+                        started = true;
+                        recordingOverlay.classList.add('visible');
+                        setTimeout(() => {
+                            recordingOverlay.classList.remove('visible');
+                            setTimeout(() => {
+                                currentIndex = 0;
+                                showNext();
+                            }, 300);
+                        }, 1500);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(section);
+        })();
+
+        // ===== TRAILER AUDIO + VOLUME MIXER =====
+        (function () {
+            const audio = document.getElementById('trailerAudio');
+            const slider = document.getElementById('volumeSlider');
+            const valueDisplay = document.getElementById('volumeValue');
+            const muteBtn = document.getElementById('muteBtn');
+            const section = document.getElementById('fastTrailer');
+
+            if (!audio || !slider || !valueDisplay || !muteBtn || !section) return;
+
+            let audioStarted = false;
+            let isSectionVisible = false;
+            let fadeInterval;
+            let userMuted = false;
+            let userTargetVol = 0.7;
+
+            function fadeTo(targetVol) {
+                clearInterval(fadeInterval);
+                const step = 0.02;
+                const stepTime = 30;
+                const currentVol = audio.volume;
+                const direction = targetVol > currentVol ? 1 : -1;
+
+                fadeInterval = setInterval(() => {
+                    audio.volume += direction * step;
+                    if ((direction > 0 && audio.volume >= targetVol) ||
+                        (direction < 0 && audio.volume <= targetVol)) {
+                        audio.volume = targetVol;
+                        clearInterval(fadeInterval);
+                    }
+                    slider.value = Math.round(audio.volume * 100);
+                    valueDisplay.textContent = Math.round(audio.volume * 100) + '%';
+                    updateMuteIcon();
+                }, stepTime);
+            }
+
+            function updateMuteIcon() {
+                const isMuted = audio.volume === 0 || userMuted;
+                muteBtn.textContent = isMuted ? '🔇' : '🔊';
+                muteBtn.classList.toggle('muted', isMuted);
+            }
+
+            muteBtn.addEventListener('click', function () {
+                userMuted = !userMuted;
+                if (userMuted) {
+                    fadeTo(0);
+                    slider.value = 0;
+                    valueDisplay.textContent = '0%';
+                } else {
+                    fadeTo(userTargetVol);
+                    slider.value = Math.round(userTargetVol * 100);
+                    valueDisplay.textContent = Math.round(userTargetVol * 100) + '%';
+                }
+            });
+
+            slider.addEventListener('input', function () {
+                const vol = this.value / 100;
+                if (isSectionVisible) {
+                    userTargetVol = vol;
+                    if (vol === 0) {
+                        userMuted = true;
+                    } else {
+                        userMuted = false;
+                    }
+                    audio.volume = vol;
+                    valueDisplay.textContent = this.value + '%';
+                    updateMuteIcon();
+                }
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!audioStarted && entry.isIntersecting) {
+                        audioStarted = true;
+                        isSectionVisible = true;
+                        setTimeout(() => {
+                            if (!userMuted && userTargetVol > 0) {
+                                audio.volume = 0;
+                                audio.play().catch(() => {
+                                    document.addEventListener('click', function startAudio() {
+                                        audio.play().catch(() => { });
+                                        document.removeEventListener('click', startAudio);
+                                    }, { once: true });
+                                });
+                                fadeTo(userTargetVol);
+                            }
+                        }, 1500);
+                    } else if (audioStarted) {
+                        isSectionVisible = entry.isIntersecting;
+                        if (entry.isIntersecting) {
+                            if (!userMuted && userTargetVol > 0) {
+                                fadeTo(userTargetVol);
+                            }
+                        } else {
+                            fadeTo(0);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-5% 0px -5% 0px',
+                threshold: [0, 0.25, 0.5, 0.75, 1]
+            });
+
+            observer.observe(section);
         })();
     </script>
 

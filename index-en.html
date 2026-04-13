@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Agency X — AI avatars, deepfake production, generative video. Charisma digitization for business.">
+    <title>AGENCY X // GENERATING REALITY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Unbounded:wght@200..900&family=Rubik+Glitch&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* FAST TRAILER SECTION */
+        .fast-trailer {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        /* Background video */
+        .trailer-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .trailer-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .fast-trailer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(0, 68, 255, 0.05) 1px,
+                    rgba(0, 68, 255, 0.05) 2px);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .fast-trailer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(0, 68, 255, 0.15),
+                    transparent);
+            animation: trailerScan 2s linear infinite;
+        }
+
+        @keyframes trailerScan {
+            0% {
+                left: -60%;
+            }
+
+            100% {
+                left: 160%;
+            }
+        }
+
+        .trailer-phrase {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .phrase-text {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.1;
+            opacity: 0;
+            transform: scale(1.2);
+            transition: all 0.15s ease-out;
+            text-shadow: 0 0 20px rgba(0, 68, 255, 0.6), 0 0 40px rgba(0, 68, 255, 0.3);
+        }
+
+        .phrase-text.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .phrase-text.highlight {
+            color: var(--color-primary);
+            text-shadow: 0 0 30px rgba(0, 68, 255, 0.8), 0 0 60px rgba(0, 68, 255, 0.5);
+        }
+
+        .phrase-text.white {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .phrase-text {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phrase-text {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Trailer video wrapper styling */
+        .trailer-video-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .trailer-video-wrapper video {
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 30px rgba(0, 68, 255, 0.5);
+        }
+
+        /* Recording Overlay */
+        .recording-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .recording-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .rec-dot-large {
+            width: 20px;
+            height: 20px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: recBlinkLarge 0.8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4);
+        }
+
+        @keyframes recBlinkLarge {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        .recording-text {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.2em;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .recording-text {
+                font-size: 1.2rem;
+            }
+
+            .rec-dot-large {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        /* Volume Mixer */
+        .volume-mixer {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 68, 255, 0.3);
+            font-family: var(--font-mono);
+        }
+
+        .mixer-label {
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 120px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 68, 255, 0.6);
+            transition: transform 0.2s;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 68, 255, 0.6);
+        }
+
+        .volume-value {
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .mute-btn {
+            background: transparent;
+            border: 2px solid rgba(0, 68, 255, 0.5);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .mute-btn:hover {
+            border-color: var(--color-primary);
+            transform: scale(1.1);
+        }
+
+        .mute-btn.muted {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .volume-mixer {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 12px;
+                gap: 8px;
+            }
+
+            .volume-slider {
+                width: 80px;
+            }
+
+            .mixer-label {
+                font-size: 0.65rem;
+            }
+
+            .volume-value {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FAST TRAILER (HERO FIRST) -->
+    <section class="fast-trailer" id="fastTrailer">
+        <!-- Background video -->
+        <video class="trailer-bg-video" muted playsinline autoplay loop>
+            <source src="Firstscen.mp4" type="video/mp4">
+        </video>
+        <div class="trailer-bg-overlay"></div>
+
+        <!-- Recording overlay -->
+        <div class="recording-overlay" id="recordingOverlay">
+            <div class="rec-dot-large"></div>
+            <span class="recording-text">RECORDING...</span>
+        </div>
+
+        <!-- Phrase text -->
+        <div class="trailer-phrase">
+            <span class="phrase-text" id="trailerPhrase"></span>
+        </div>
+
+        <!-- Audio Volume Mixer -->
+        <div class="volume-mixer" id="volumeMixer">
+            <div class="mixer-label">🔊 AUDIO</div>
+            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+            <span class="volume-value" id="volumeValue">70%</span>
+            <button class="mute-btn" id="muteBtn" aria-label="Mute">🔊</button>
+        </div>
+    </section>
+
+    <!-- Hidden Audio Element -->
+    <audio id="trailerAudio" loop preload="auto">
+        <source src="Lady Gaga - Government Hooker (Super Slowed by Cartnes)_(mp3tornado.net).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-x">X</span>
+            <span class="logo-bracket">]</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#services">SERVICES</a></li>
+            <li><a href="#cases">CASES</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span>ONLINE</span>
+        </div>
+        <div class="lang-switcher">
+            <a href="index.html" class="lang-btn">RU</a>
+            <a href="index-zh.html" class="lang-btn">中文</a>
+            <span class="lang-btn active">EN</span>
+        </div>
+        <button class="burger-menu" aria-label="Open menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-meta">
+                    <span>EST. 2024</span>
+                    <span class="meta-divider">//</span>
+                    <span>MOSCOW_RU</span>
+                    <span class="meta-divider">//</span>
+                    <span>AI_PRODUCTION</span>
+                </div>
+
+                <h1 class="hero-title">
+                    WE DON'T CREATE<br>
+                    <span class="highlight">CONTENT_</span><br>
+                    WE GENERATE<br>
+                    <span class="highlight">REALITY.</span>
+                </h1>
+
+                <p class="hero-description">
+                    In a world where truth is just a rendering question,<br>
+                    we choose to be <strong>architects of the new flesh</strong>.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#contact" class="btn-primary">
+                        <span class="btn-bracket">[</span>
+                        START_PROJECT
+                        <span class="btn-bracket">]</span>
+                    </a>
+                    <a href="#cases" class="btn-secondary">
+                        VIEW CASES →
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">500K+</div>
+                        <div class="stat-label">GENERATIONS/MO</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">UPTIME</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">LANGUAGES</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="giant-x">X</div>
+                <div class="visual-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="ticker__item">// CHARISMA DIGITIZATION</span>
+            <span class="ticker__item">// DEEPFAKE PRODUCTION</span>
+            <span class="ticker__item">// VIRTUAL INFLUENCERS</span>
+            <span class="ticker__item">// GENERATIVE VIDEO</span>
+            <span class="ticker__item">// UGC SCALING</span>
+            <span class="ticker__item">// CHARISMA DIGITIZATION</span>
+            <span class="ticker__item">// DEEPFAKE PRODUCTION</span>
+        </div>
+    </div>
+
+    <!-- HOW WE WORK -->
+    <section id="process" class="process-section">
+        <div class="section-header">
+            <div class="section-number">00.</div>
+            <h2 class="section-title">LAUNCH_PROTOCOL</h2>
+        </div>
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>BRIEF</h3>
+                <p>We upload the task to the system. Create the spec.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>PROTOTYPE</h3>
+                <p>Generate a test sample. Review together.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>APPROVAL</h3>
+                <p>Make revisions. Approve the final version.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <h3>LAUNCH</h3>
+                <p>Generate content. Deliver on schedule.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">05</div>
+                <h3>SUPPORT</h3>
+                <p>Update, scale, and maintain.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON SECTION -->
+    <section id="comparison" class="comparison-section">
+        <div class="section-header">
+            <div class="section-number">01.</div>
+            <h2 class="section-title">WITH_US_VS_WITHOUT_US</h2>
+        </div>
+
+        <!-- Interactive comparison slider -->
+        <div class="comparison-slider-container">
+            <!-- Tab buttons for mobile -->
+            <div class="comparison-tabs">
+                <button class="tab-btn active" data-tab="without">WITHOUT_US</button>
+                <button class="tab-btn" data-tab="with">WITH_US</button>
+            </div>
+
+            <div class="comparison-slider">
+                <!-- LEFT SIDE (WITHOUT US) -->
+                <div class="comparison-side left-side">
+                    <div class="side-label negative-label">WITHOUT_AGENCY_X</div>
+                    <div class="comparison-grid">
+                        <div class="comparison-card negative">
+                            <div class="card-icon">⏱️</div>
+                            <h3>PRODUCTION</h3>
+                            <p class="metric">2-4 weeks</p>
+                            <p class="desc">For a single video</p>
+                        </div>
+                        <div class="comparison-card negative">
+                            <div class="card-icon">💰</div>
+                            <h3>BUDGET</h3>
+                            <p class="metric">$5,000-50,000</p>
+                            <p class="desc">For filming, actors, editing</p>
+                        </div>
+                        <div class="comparison-card negative">
+                            <div class="card-icon">🔄</div>
+                            <h3>SCALING</h3>
+                            <p class="metric">Impossible</p>
+                            <p class="desc">Each video requires new shoot</p>
+                        </div>
+                        <div class="comparison-card negative">
+                            <div class="card-icon">🌍</div>
+                            <h3>LOCALIZATION</h3>
+                            <p class="metric">$10K+ per language</p>
+                            <p class="desc">New actors, dubbing, editing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE (WITH US) -->
+                <div class="comparison-side right-side">
+                    <div class="side-label positive-label">WITH_AGENCY_X</div>
+                    <div class="comparison-grid">
+                        <div class="comparison-card positive">
+                            <div class="card-icon">⚡</div>
+                            <h3>PRODUCTION</h3>
+                            <p class="metric">24-48 hours</p>
+                            <p class="desc">From idea to finished video</p>
+                        </div>
+                        <div class="comparison-card positive">
+                            <div class="card-icon">💎</div>
+                            <h3>BUDGET</h3>
+                            <p class="metric">$500-5,000</p>
+                            <p class="desc">10x cheaper than traditional filming</p>
+                        </div>
+                        <div class="comparison-card positive">
+                            <div class="card-icon">🚀</div>
+                            <h3>SCALING</h3>
+                            <p class="metric">Unlimited</p>
+                            <p class="desc">1000 variants from one avatar</p>
+                        </div>
+                        <div class="comparison-card positive">
+                            <div class="card-icon">🌐</div>
+                            <h3>LOCALIZATION</h3>
+                            <p class="metric">$50 per language</p>
+                            <p class="desc">Auto dubbing + lip-sync</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIVIDER WITH HANDLE -->
+                <div class="slider-divider" id="sliderDivider">
+                    <div class="slider-handle">
+                        <span class="handle-icon">⟷</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hint -->
+            <div class="slider-hint">
+                <span class="hint-icon">👆</span>
+                Drag the divider or wait for auto-switch
+            </div>
+        </div>
+
+        <div class="comparison-cta">
+            <p class="cta-text">Save 90% time and budget. Scale content without limits.</p>
+            <a href="#contact" class="btn-primary">
+                <span class="btn-bracket">[</span>
+                START_SAVING
+                <span class="btn-bracket">]</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services-section">
+        <div class="section-header">
+            <div class="section-number">02.</div>
+            <h2 class="section-title">GENERATION_PROTOCOLS</h2>
+        </div>
+
+        <div class="services-grid">
+            <article class="service-card">
+                <div class="service-header">
+                    <div class="service-id">PROTOCOL_001</div>
+                    <div class="service-status">ACTIVE</div>
+                </div>
+                <div class="service-visual visual-avatars"></div>
+                <h3 class="service-title">AI_AVATARS</h3>
+                <p class="service-desc">
+                    Creating digital twins with hyper-realistic facial expressions.
+                    Full personality digitization: from voice to micro-expressions.
+                </p>
+                <div class="service-tech">
+                    <span class="tech-badge">DEEP_LEARNING</span>
+                    <span class="tech-badge">FACE_REENACTMENT</span>
+                    <span class="tech-badge">VOICE_CLONE</span>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">from $500</div>
+                </div>
+            </article>
+
+            <article class="service-card">
+                <div class="service-header">
+                    <div class="service-id">PROTOCOL_002</div>
+                    <div class="service-status">ACTIVE</div>
+                </div>
+                <div class="service-visual visual-video"></div>
+                <h3 class="service-title">GENERATIVE_VIDEO</h3>
+                <p class="service-desc">
+                    Ad campaigns without cameras or actors.
+                    Fully synthetic creative. Infinite variations.
+                </p>
+                <div class="service-tech">
+                    <span class="tech-badge">TEXT_TO_VIDEO</span>
+                    <span class="tech-badge">SORA/RUNWAY</span>
+                    <span class="tech-badge">PROMPT_ENG</span>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">from $800</div>
+                </div>
+            </article>
+
+            <article class="service-card">
+                <div class="service-header">
+                    <div class="service-id">PROTOCOL_003</div>
+                    <div class="service-status">ACTIVE</div>
+                </div>
+                <div class="service-visual visual-scaling"></div>
+                <h3 class="service-title">UGC_2.0_SCALING</h3>
+                <p class="service-desc">
+                    From one video — 1000 variants.
+                    Automatic localization, dubbing, personalization.
+                </p>
+                <div class="service-tech">
+                    <span class="tech-badge">AUTO_DUBBING</span>
+                    <span class="tech-badge">BG_SWAP</span>
+                    <span class="tech-badge">PERSONALIZATION</span>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">from $300</div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- CASES SECTION -->
+    <section id="cases" class="cases-section">
+        <div class="section-header">
+            <div class="section-number">03.</div>
+            <h2 class="section-title">COMPLETED_PROTOCOLS</h2>
+        </div>
+
+        <div class="cases-grid">
+            <article class="case-card" data-case="1">
+                <div class="case-visual" style="background: linear-gradient(45deg, #0044ff, #000);"></div>
+                <div class="case-content">
+                    <div class="case-id">#CASE_091</div>
+                    <h3>NEO_BANK ASSISTANT</h3>
+                    <p>50,000 personalized videos for VIP clients. 400% conversion growth.</p>
+                    <button class="case-btn" onclick="openCaseModal(1)">[LEARN_MORE]</button>
+                </div>
+            </article>
+
+            <article class="case-card" data-case="2">
+                <div class="case-visual"
+                    style="background: repeating-linear-gradient(90deg, #fff, #fff 2px, #eee 2px, #eee 4px);"></div>
+                <div class="case-content">
+                    <div class="case-id">#CASE_104</div>
+                    <h3>VIRTUAL FASHION MODEL</h3>
+                    <p>Fully digital influencer. 1M followers in 3 months.</p>
+                    <button class="case-btn" onclick="openCaseModal(2)">[LEARN_MORE]</button>
+                </div>
+            </article>
+
+            <article class="case-card" data-case="4">
+                <div class="case-visual" style="background: #000;"></div>
+                <div class="case-content">
+                    <div class="case-id">#CASE_202</div>
+                    <h3>DEEPFAKE CEO</h3>
+                    <p>Digital CEO clone. Saving 20 hours of time per month.</p>
+                    <button class="case-btn" onclick="openCaseModal(4)">[LEARN_MORE]</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- PRINCIPLES SECTION -->
+    <section id="principles" class="principles-section">
+        <div class="section-header">
+            <div class="section-number">04.</div>
+            <h2 class="section-title">SAFETY_PROTOCOLS</h2>
+        </div>
+
+        <div class="principles-grid">
+            <div class="principle-card">
+                <div class="principle-number">[01]</div>
+                <h3>MODEL CONSENT</h3>
+                <p>We work only with rights holders' consent. All materials are legal and verified.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-number">[02]</div>
+                <h3>NDA_BY_DEFAULT</h3>
+                <p>Confidentiality by default. Contract and NDA — standard package.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-number">[03]</div>
+                <h3>TRANSPARENCY</h3>
+                <p>All materials are marked as synthetic. Full process transparency.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-number">[04]</div>
+                <h3>COMPLIANCE</h3>
+                <p>We comply with data protection regulations. Processing per protocol.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+        <div class="contact-content">
+            <h2 class="contact-title">READY_FOR_TRANSFORMATION?</h2>
+            <p class="contact-text">
+                First consultation is free. We'll discuss your project and<br>
+                show AI generation capabilities in action.
+            </p>
+            <div class="contact-info">
+                <div class="contact-item contact-email">
+                    <div class="contact-label">EMAIL</div>
+                    <div class="contact-value"></div>
+                </div>
+                <div class="contact-item contact-telegram">
+                    <div class="contact-label">TELEGRAM</div>
+                    <div class="contact-value"></div>
+                </div>
+                <div class="contact-item contact-location">
+                    <div class="contact-label">LOCATION</div>
+                    <div class="contact-value"></div>
+                </div>
+            </div>
+
+            <!-- User agreement -->
+
+            <!-- Privacy toast notification -->
+            <div id="privacyToast" class="privacy-toast">
+                <div class="toast-header">
+                    <span class="toast-icon">🔒</span>
+                    <span class="toast-title">DATA VERIFICATION</span>
+                    <button class="toast-close" onclick="closePrivacyToast()">&times;</button>
+                </div>
+                <div class="toast-body">
+                    <p>We verify and protect your information in compliance with data protection laws.</p>
+                    <p>Your data is not shared with third parties.</p>
+                    <a href="#" onclick="openAgreementModal(event); closePrivacyToast();">User Agreement →</a>
+                </div>
+            </div>
+
+            <a href="mailto:noam.pressman@gmail.com" class="btn-contact">
+                <span class="btn-bracket">[</span>
+                CONTACT_US
+                <span class="btn-bracket">]</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3 class="footer-logo">X_AGENCY</h3>
+                <p class="footer-tagline">Generating Reality Since 2024</p>
+                <p class="footer-copyright">© 2026 All rights reserved</p>
+            </div>
+            <div class="footer-right">
+                <a href="brandbook.html" class="footer-link">Brandbook v1.0</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS FOR CASES -->
+    <div id="caseModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCaseModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- USER AGREEMENT MODAL -->
+    <div id="agreementModal" class="agreement-modal">
+        <div class="agreement-modal-content">
+            <span class="agreement-close" onclick="closeAgreementModal()">&times;</span>
+            <h2>USER AGREEMENT</h2>
+
+            <h3>1. General Provisions</h3>
+            <p>This User Agreement (hereinafter — the "Agreement") governs the relationship between Agency X
+                (hereinafter — the "Service Provider") and the website user (hereinafter — the "User") regarding the
+                processing of personal data and the use of services.</p>
+
+            <h3>2. Personal Data Processing</h3>
+            <p>By providing your contact details on the website, the User consents to the processing of personal data in
+                accordance with applicable data protection laws. The Service Provider undertakes to use the provided
+                data exclusively for communication with the User regarding their inquiry.</p>
+
+            <h3>3. Data Collection Purposes</h3>
+            <p>Personal data is collected for the following purposes:</p>
+            <p>— Communication with the User regarding projects;<br>
+                — Providing information about services;<br>
+                — Preparing commercial proposals.</p>
+
+            <h3>4. Data Protection</h3>
+            <p>The Service Provider takes necessary measures to protect the User's personal data from unauthorized
+                access, alteration, disclosure, or destruction. Data is not shared with third parties without the User's
+                consent, except as required by applicable law.</p>
+
+            <h3>5. Withdrawal of Consent</h3>
+            <p>The User has the right to withdraw consent for personal data processing by submitting a request to the
+                Service Provider.</p>
+
+            <div class="agreement-modal-actions">
+                <button class="agreement-accept-btn" onclick="acceptAgreement()">
+                    I AGREE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== BURGER MENU =====
+        (function () {
+            const burger = document.querySelector('.burger-menu');
+            const nav = document.querySelector('.main-nav');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (burger && navLinks) {
+                burger.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+
+                    if (navLinks.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                        document.body.style.touchAction = 'none';
+                    } else {
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                });
+
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    });
+                });
+
+                document.addEventListener('click', function (e) {
+                    if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+                    }
+                });
+            }
+        })();
+
+        // ===== AGREEMENT MODAL =====
+        function openAgreementModal(event) {
+            if (event) event.preventDefault();
+            const modal = document.getElementById('agreementModal');
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+            });
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAgreementModal() {
+            const modal = document.getElementById('agreementModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        function acceptAgreement() {
+            const checkbox = document.getElementById('agreementCheck');
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+            closeAgreementModal();
+            showAcceptToast();
+        }
+
+        function showAcceptToast() {
+            const toast = document.getElementById('privacyToast');
+            if (toast) {
+                toast.querySelector('.toast-title').textContent = 'AGREEMENT ACCEPTED ✓';
+                toast.querySelector('.toast-body').innerHTML = '<p>Thank you! You have accepted the user agreement.</p>';
+                toast.classList.add('show');
+                setTimeout(() => {
+                    closePrivacyToast();
+                    setTimeout(() => {
+                        toast.querySelector('.toast-title').textContent = 'DATA VERIFICATION';
+                        toast.querySelector('.toast-body').innerHTML = `
+                            <p>We verify and protect your information in compliance with data protection laws.</p>
+                            <p>Your data is not shared with third parties.</p>
+                            <a href="#" onclick="openAgreementModal(event); closePrivacyToast();">User Agreement →</a>
+                        `;
+                    }, 500);
+                }, 3000);
+            }
+        }
+
+        // ===== PRIVACY TOAST =====
+        let toastTimeout;
+
+        function showPrivacyToast() {
+            const toast = document.getElementById('privacyToast');
+            if (toast) {
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 1500);
+                toastTimeout = setTimeout(() => {
+                    closePrivacyToast();
+                }, 9500);
+            }
+        }
+
+        function closePrivacyToast() {
+            const toast = document.getElementById('privacyToast');
+            if (toast) {
+                toast.classList.remove('show');
+            }
+            if (toastTimeout) {
+                clearTimeout(toastTimeout);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            showPrivacyToast();
+        });
+
+        // ===== CASE MODALS =====
+        const caseData = {
+            1: {
+                title: 'NEO_BANK ASSISTANT',
+                desc: '<p><strong>Task:</strong> Create personalized video messages for VIP bank clients.</p><p><strong>Solution:</strong> A digital AI assistant avatar was created that addresses each client by name and presents personalized offers.</p><p><strong>Result:</strong> 50,000 videos in 2 weeks. 400% increase in conversion compared to email campaigns.</p>'
+            },
+            2: {
+                title: 'VIRTUAL FASHION MODEL',
+                desc: '<p><strong>Task:</strong> Create a virtual influencer for a fashion brand.</p><p><strong>Solution:</strong> A completely digital model was generated with unique appearance, style, and personality.</p><p><strong>Result:</strong> 1M followers on Instagram in 3 months. 200+ publications without a single photoshoot.</p>'
+            },
+            4: {
+                title: 'DEEPFAKE CEO',
+                desc: '<p><strong>Task:</strong> Create a digital clone of the company CEO for internal communications.</p><p><strong>Solution:</strong> A voice, facial expression, and mannerism model was trained. The CEO can now "record" messages without being present.</p><p><strong>Result:</strong> Saving 20 hours of the CEO\'s time per month. 100+ internal videos per month.</p>'
+            }
+        };
+
+        function openCaseModal(id) {
+            const modal = document.getElementById('caseModal');
+            const body = document.getElementById('modalBody');
+            const data = caseData[id];
+
+            if (data) {
+                body.innerHTML = `<h2>${data.title}</h2>${data.desc}`;
+            }
+
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+            });
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCaseModal() {
+            const modal = document.getElementById('caseModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        document.getElementById('caseModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeCaseModal();
+            }
+        });
+
+        // ===== COMPARISON SLIDER =====
+        (function () {
+            const slider = document.querySelector('.comparison-slider');
+            const divider = document.getElementById('sliderDivider');
+
+            if (!slider || !divider) return;
+
+            let isDragging = false;
+            let currentPosition = 50;
+            let autoSlideDirection = 1;
+            let autoSlideInterval;
+
+            // Set slider position
+            function setSliderPosition(percent) {
+                currentPosition = Math.max(0, Math.min(100, percent));
+                const rightSide = slider.querySelector('.right-side');
+                rightSide.style.clipPath = `inset(0 0 0 ${currentPosition}%)`;
+                divider.style.left = `${currentPosition}%`;
+            }
+
+            // Start dragging
+            function startDrag(e) {
+                isDragging = true;
+                stopAutoSlide();
+                document.body.style.cursor = 'ew-resize';
+                e.preventDefault();
+            }
+
+            // Dragging
+            function drag(e) {
+                if (!isDragging) return;
+
+                const rect = slider.getBoundingClientRect();
+                const x = (e.type.includes('mouse') ? e.clientX : e.touches[0].clientX) - rect.left;
+                const percent = (x / rect.width) * 100;
+
+                setSliderPosition(percent);
+            }
+
+            // Stop dragging
+            function stopDrag() {
+                if (isDragging) {
+                    isDragging = false;
+                    document.body.style.cursor = 'default';
+                    setTimeout(startAutoSlide, 3000);
+                }
+            }
+
+            // Auto switching
+            function autoSlide() {
+                currentPosition += autoSlideDirection * 0.5;
+
+                if (currentPosition >= 100) {
+                    currentPosition = 100;
+                    autoSlideDirection = -1;
+                } else if (currentPosition <= 0) {
+                    currentPosition = 0;
+                    autoSlideDirection = 1;
+                }
+
+                setSliderPosition(currentPosition);
+            }
+
+            function startAutoSlide() {
+                stopAutoSlide();
+                autoSlideInterval = setInterval(autoSlide, 30);
+            }
+
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = null;
+                }
+            }
+
+            // Mouse events
+            divider.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+
+            // Touch events
+            divider.addEventListener('touchstart', startDrag, { passive: false });
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('touchend', stopDrag);
+
+            setSliderPosition(50);
+            setTimeout(startAutoSlide, 2000);
+
+            slider.addEventListener('mouseenter', stopAutoSlide);
+            slider.addEventListener('mouseleave', () => setTimeout(startAutoSlide, 1000));
+        })();
+
+        // ===== COMPARISON TABS (mobile) =====
+        (function () {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const sliderContainer = document.querySelector('.comparison-slider-container');
+
+            if (tabBtns.length && sliderContainer) {
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+
+                        const tab = this.getAttribute('data-tab');
+                        if (tab === 'with') {
+                            sliderContainer.classList.add('showing-with');
+                        } else {
+                            sliderContainer.classList.remove('showing-with');
+                        }
+                    });
+                });
+            }
+        })();
+
+        // ===== FAST TRAILER PHRASE ANIMATION =====
+        (function () {
+            const phrases = [
+                { text: 'WE ARE\nTHOSE WHO\nTURN THOUGHT INTO REALITY', highlight: true, duration: 1200 },
+                { text: 'WE, WHO KNOW:\nARTIFICIAL ≠ FAKE', highlight: false, duration: 1000 },
+                { text: 'WE ARE THOSE WHO\nMAKE MARKETING\nREAL', highlight: true, duration: 1200 },
+                { text: 'A NEW STEP\nINTO A NEW WORLD\nOF COMMUNICATION', highlight: false, duration: 1200 },
+                { text: 'ONE WORD', highlight: false, duration: 700 },
+                { text: 'ONE THOUGHT', highlight: false, duration: 700 },
+                { text: 'ONE EVOLUTION', highlight: false, duration: 700 },
+                { text: 'A CLEAR PATH', highlight: true, duration: 1000 },
+                { text: 'YOU...', highlight: true, duration: 1200 },
+                { text: 'CAN BECOME\nANYTHING', highlight: false, duration: 1200 },
+                { text: 'WE MAKE\nYOU REAL', highlight: true, duration: 1200 },
+                { text: 'THE CHOICE\nIS YOURS', highlight: false, duration: 1200 },
+                { text: 'I COULD BE\nEVERYTHING', highlight: true, duration: 1500 },
+            ];
+
+            const videoFiles = [
+                'Firstscen.mp4',
+                'SenondScen.mp4',
+                'thirdscen.mp4',
+                'fourdscen.mp4',
+                'FIFTHSCEN.mp4'
+            ];
+
+            const section = document.getElementById('fastTrailer');
+            const phraseEl = document.getElementById('trailerPhrase');
+            const recordingOverlay = document.getElementById('recordingOverlay');
+            if (!phraseEl || !section) return;
+
+            // Create video element (hidden initially)
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'trailer-video-wrapper';
+            videoWrapper.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.05s;z-index:1;pointer-events:none;';
+            videoWrapper.innerHTML = '<video muted playsinline style="max-width:80%;max-height:80%;object-fit:contain;"></video>';
+            section.appendChild(videoWrapper);
+
+            const videoEl = videoWrapper.querySelector('video');
+
+            let currentIndex = 0;
+            let started = false;
+
+            function showNext() {
+                if (!started) return;
+
+                const phrase = phrases[currentIndex];
+                const isHighlight = phrase.highlight;
+
+                // Show phrase
+                phraseEl.textContent = phrase.text;
+                phraseEl.className = 'phrase-text ' + (isHighlight ? 'highlight' : 'white');
+                void phraseEl.offsetWidth;
+                phraseEl.classList.add('visible');
+
+                // Hide video
+                videoWrapper.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Flash video briefly (300ms)
+                    const randomVideo = videoFiles[Math.floor(Math.random() * videoFiles.length)];
+                    videoEl.src = randomVideo;
+                    videoEl.currentTime = 0;
+                    videoEl.play().catch(() => { });
+
+                    // Flash: hide phrase, show video
+                    phraseEl.classList.remove('visible');
+                    videoWrapper.style.opacity = '1';
+
+                    setTimeout(() => {
+                        videoWrapper.style.opacity = '0';
+                        videoEl.pause();
+
+                        setTimeout(() => {
+                            currentIndex = (currentIndex + 1) % phrases.length;
+                            if (currentIndex === 0) {
+                                setTimeout(() => {
+                                    currentIndex = 0;
+                                    showNext();
+                                }, 2000);
+                            } else {
+                                showNext();
+                            }
+                        }, 200);
+                    }, 300);
+                }, phrase.duration);
+            }
+
+            // Trigger when scrolled into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !started) {
+                        started = true;
+                        // Show recording overlay first
+                        recordingOverlay.classList.add('visible');
+
+                        // After 1.5s delay, start the trailer
+                        setTimeout(() => {
+                            recordingOverlay.classList.remove('visible');
+                            setTimeout(() => {
+                                currentIndex = 0;
+                                showNext();
+                            }, 300);
+                        }, 1500);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(section);
+        })();
+
+        // ===== TRAILER AUDIO + VOLUME MIXER =====
+        (function () {
+            const audio = document.getElementById('trailerAudio');
+            const slider = document.getElementById('volumeSlider');
+            const valueDisplay = document.getElementById('volumeValue');
+            const muteBtn = document.getElementById('muteBtn');
+            const section = document.getElementById('fastTrailer');
+
+            if (!audio || !slider || !valueDisplay || !muteBtn || !section) return;
+
+            let audioStarted = false;
+            let isSectionVisible = false;
+            let fadeInterval;
+            let userMuted = false;
+            let userTargetVol = 0.7;
+
+            function fadeTo(targetVol) {
+                clearInterval(fadeInterval);
+                const step = 0.02;
+                const stepTime = 30;
+                const currentVol = audio.volume;
+                const direction = targetVol > currentVol ? 1 : -1;
+
+                fadeInterval = setInterval(() => {
+                    audio.volume += direction * step;
+                    if ((direction > 0 && audio.volume >= targetVol) ||
+                        (direction < 0 && audio.volume <= targetVol)) {
+                        audio.volume = targetVol;
+                        clearInterval(fadeInterval);
+                    }
+                    slider.value = Math.round(audio.volume * 100);
+                    valueDisplay.textContent = Math.round(audio.volume * 100) + '%';
+                    updateMuteIcon();
+                }, stepTime);
+            }
+
+            function updateMuteIcon() {
+                const isMuted = audio.volume <= 0.01 || userMuted;
+                muteBtn.textContent = isMuted ? '🔇' : '🔊';
+                muteBtn.classList.toggle('muted', isMuted);
+            }
+
+            // Mute button — direct toggle, no fade
+            muteBtn.addEventListener('click', function () {
+                userMuted = !userMuted;
+                if (userMuted) {
+                    clearInterval(fadeInterval);
+                    audio.volume = 0;
+                    slider.value = 0;
+                    valueDisplay.textContent = '0%';
+                } else {
+                    clearInterval(fadeInterval);
+                    audio.volume = userTargetVol;
+                    slider.value = Math.round(userTargetVol * 100);
+                    valueDisplay.textContent = Math.round(userTargetVol * 100) + '%';
+                }
+                updateMuteIcon();
+            });
+
+            // Slider control
+            slider.addEventListener('input', function () {
+                const vol = this.value / 100;
+                userTargetVol = vol;
+                if (vol <= 0) {
+                    userMuted = true;
+                    clearInterval(fadeInterval);
+                    audio.volume = 0;
+                } else {
+                    userMuted = false;
+                    if (isSectionVisible) {
+                        audio.volume = vol;
+                    }
+                }
+                valueDisplay.textContent = this.value + '%';
+                updateMuteIcon();
+            });
+
+            // Track section visibility
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!audioStarted && entry.isIntersecting) {
+                        audioStarted = true;
+                        isSectionVisible = true;
+                        setTimeout(() => {
+                            if (!userMuted && userTargetVol > 0) {
+                                audio.volume = 0;
+                                audio.play().catch(() => {
+                                    document.addEventListener('click', function startAudio() {
+                                        audio.play().catch(() => { });
+                                        document.removeEventListener('click', startAudio);
+                                    }, { once: true });
+                                });
+                                fadeTo(userTargetVol);
+                            }
+                        }, 1500);
+                    } else if (audioStarted) {
+                        isSectionVisible = entry.isIntersecting;
+                        if (entry.isIntersecting) {
+                            if (!userMuted && userTargetVol > 0) {
+                                fadeTo(userTargetVol);
+                            }
+                        } else {
+                            fadeTo(0);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-5% 0px -5% 0px',
+                threshold: [0, 0.25, 0.5, 0.75, 1]
+            });
+
+            observer.observe(section);
+        })();
+
+    </script>
+
+</body>
+
+</html>
