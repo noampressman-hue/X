@@ -43,6 +43,31 @@
             padding: 2rem;
         }
 
+        /* Background video */
+        .trailer-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .trailer-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
         .fast-trailer::before {
             content: '';
             position: absolute;
@@ -55,6 +80,7 @@
                     transparent 1px,
                     rgba(0, 68, 255, 0.05) 1px,
                     rgba(0, 68, 255, 0.05) 2px);
+            z-index: 2;
             pointer-events: none;
         }
 
@@ -317,44 +343,173 @@
                 height: 14px;
             }
         }
+
+        /* Transparent navigation for trailer */
+        .nav-transparent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .nav-transparent .nav-logo,
+        .nav-transparent .nav-links a,
+        .nav-transparent .nav-status,
+        .nav-transparent .lang-btn {
+            color: #fff;
+        }
+
+        .nav-transparent .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-transparent .burger-line {
+            background: #fff;
+        }
+
+        /* Scroll down button */
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: scrollBounce 2s ease-in-out infinite;
+            transition: color 0.3s;
+        }
+
+        .scroll-down-btn:hover {
+            color: #fff;
+        }
+
+        .scroll-arrow {
+            font-size: 1.5rem;
+            animation: scrollArrow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(5px);
+            }
+        }
+
+        @keyframes scrollArrow {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Gradient transition */
+        .trailer-gradient {
+            height: 150px;
+            background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- FAST TRAILER (HERO FIRST) -->
+    <section class="fast-trailer" id="fastTrailer">
+        <!-- Background video -->
+        <video class="trailer-bg-video" muted playsinline autoplay loop>
+            <source src="Firstscen.mp4" type="video/mp4">
+        </video>
+        <div class="trailer-bg-overlay"></div>
+
+        <!-- Transparent Navigation -->
+        <nav class="main-nav nav-transparent">
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-x">X</span>
+                <span class="logo-bracket">]</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#cases">案例</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span>ONLINE</span>
+            </div>
+            <div class="lang-switcher">
+                <span class="lang-btn active">中文</span>
+                <a href="index-en.html" class="lang-btn">EN</a>
+                <a href="index.html" class="lang-btn">RU</a>
+            </div>
+            <button class="burger-menu" aria-label="打开菜单">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </nav>
+
+        <!-- Recording overlay -->
+        <div class="recording-overlay" id="recordingOverlay">
+            <div class="rec-dot-large"></div>
+            <span class="recording-text">正在录制中...</span>
+        </div>
+
+        <!-- Phrase text -->
+        <div class="trailer-phrase">
+            <span class="phrase-text" id="trailerPhrase"></span>
+        </div>
+
+        <!-- Audio Volume Mixer -->
+        <div class="volume-mixer" id="volumeMixer">
+            <div class="mixer-label">🔊 音频</div>
+            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+            <span class="volume-value" id="volumeValue">70%</span>
+            <button class="mute-btn" id="muteBtn" aria-label="Mute">🔊</button>
+        </div>
+
+        <!-- Scroll down button -->
+        <a href="#home" class="scroll-down-btn" id="scrollDownBtn">
+            <span class="scroll-arrow">↓</span>
+        </a>
+    </section>
+
+    <!-- Gradient transition -->
+    <div class="trailer-gradient"></div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="trailerAudio" loop preload="auto">
+        <source src="Lady Gaga - Government Hooker (Super Slowed by Cartnes)_(mp3tornado.net).mp3" type="audio/mpeg">
+    </audio>
+
     <div class="grid-overlay"></div>
     <div class="scanlines"></div>
 
-    <!-- 导航 -->
-    <nav class="main-nav">
-        <div class="nav-logo">
-            <span class="logo-bracket">[</span>
-            <span class="logo-x">X</span>
-            <span class="logo-bracket">]</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#services">服务</a></li>
-            <li><a href="#cases">案例</a></li>
-            <li><a href="#contact">联系</a></li>
-        </ul>
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            <span>在线</span>
-        </div>
-        <div class="lang-switcher">
-            <a href="index.html" class="lang-btn">RU</a>
-            <a href="index-en.html" class="lang-btn">EN</a>
-            <span class="lang-btn active">中文</span>
-        </div>
-        <button class="burger-menu" aria-label="打开菜单">
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-        </button>
-    </nav>
-
-    <!-- 主视觉区 -->
+    <!-- MAIN CONTENT -->
     <section id="home" class="hero-section">
         <div class="hero-container">
             <div class="hero-content">
@@ -411,30 +566,6 @@
             </div>
         </div>
     </section>
-
-    <!-- 快速短语预告 -->
-    <section class="fast-trailer" id="fastTrailer">
-        <div class="trailer-phrase">
-            <span class="phrase-text" id="trailerPhrase"></span>
-        </div>
-        <!-- 录制提示 -->
-        <div class="recording-overlay" id="recordingOverlay">
-            <div class="rec-dot-large"></div>
-            <span class="recording-text">正在录制中...</span>
-        </div>
-        <!-- 音量调节 -->
-        <div class="volume-mixer" id="volumeMixer">
-            <div class="mixer-label">🔊 音频</div>
-            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
-            <span class="volume-value" id="volumeValue">70%</span>
-            <button class="mute-btn" id="muteBtn" aria-label="Mute">🔊</button>
-        </div>
-    </section>
-
-    <!-- 隐藏音频 -->
-    <audio id="trailerAudio" loop preload="auto">
-        <source src="Lady Gaga - Government Hooker (Super Slowed by Cartes)_(mp3tornado.net).mp3" type="audio/mpeg">
-    </audio>
 
     <!-- 滚动字幕 -->
     <div class="ticker-wrap">
@@ -1224,6 +1355,14 @@
             let userMuted = false;
             let userTargetVol = 0.7;
 
+            function setVolume(vol) {
+                clearInterval(fadeInterval);
+                audio.volume = vol;
+                slider.value = Math.round(vol * 100);
+                valueDisplay.textContent = Math.round(vol * 100) + '%';
+                updateMuteIcon();
+            }
+
             function fadeTo(targetVol) {
                 clearInterval(fadeInterval);
                 const step = 0.02;
@@ -1245,56 +1384,40 @@
             }
 
             function updateMuteIcon() {
-                const isMuted = audio.volume === 0 || userMuted;
+                const isMuted = audio.volume <= 0.01 || userMuted;
                 muteBtn.textContent = isMuted ? '🔇' : '🔊';
                 muteBtn.classList.toggle('muted', isMuted);
             }
 
+            // Mute button — instant toggle
             muteBtn.addEventListener('click', function () {
                 userMuted = !userMuted;
                 if (userMuted) {
-                    fadeTo(0);
-                    slider.value = 0;
-                    valueDisplay.textContent = '0%';
+                    setVolume(0);
                 } else {
-                    fadeTo(userTargetVol);
-                    slider.value = Math.round(userTargetVol * 100);
-                    valueDisplay.textContent = Math.round(userTargetVol * 100) + '%';
+                    setVolume(userTargetVol);
                 }
             });
 
+            // Slider control — always works, instant
             slider.addEventListener('input', function () {
                 const vol = this.value / 100;
-                if (isSectionVisible) {
-                    userTargetVol = vol;
-                    if (vol === 0) {
-                        userMuted = true;
-                    } else {
-                        userMuted = false;
-                    }
-                    audio.volume = vol;
-                    valueDisplay.textContent = this.value + '%';
-                    updateMuteIcon();
+                userTargetVol = vol;
+                if (vol <= 0) {
+                    userMuted = true;
+                } else {
+                    userMuted = false;
                 }
+                setVolume(vol);
             });
 
+            // Track section visibility
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (!audioStarted && entry.isIntersecting) {
                         audioStarted = true;
                         isSectionVisible = true;
-                        setTimeout(() => {
-                            if (!userMuted && userTargetVol > 0) {
-                                audio.volume = 0;
-                                audio.play().catch(() => {
-                                    document.addEventListener('click', function startAudio() {
-                                        audio.play().catch(() => { });
-                                        document.removeEventListener('click', startAudio);
-                                    }, { once: true });
-                                });
-                                fadeTo(userTargetVol);
-                            }
-                        }, 1500);
+                        startAudioDelayed();
                     } else if (audioStarted) {
                         isSectionVisible = entry.isIntersecting;
                         if (entry.isIntersecting) {
@@ -1306,10 +1429,30 @@
                         }
                     }
                 });
-            }, {
-                rootMargin: '-5% 0px -5% 0px',
-                threshold: [0, 0.25, 0.5, 0.75, 1]
-            });
+            }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+            function startAudioDelayed() {
+                setTimeout(() => {
+                    if (!userMuted && userTargetVol > 0) {
+                        audio.volume = 0;
+                        audio.play().catch(() => {
+                            document.addEventListener('click', function startAudio() {
+                                audio.play().catch(() => { });
+                                document.removeEventListener('click', startAudio);
+                            }, { once: true });
+                        });
+                        fadeTo(userTargetVol);
+                    }
+                }, 1500);
+            }
+
+            // Check if already visible on init
+            const rect = section.getBoundingClientRect();
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                audioStarted = true;
+                isSectionVisible = true;
+                startAudioDelayed();
+            }
 
             observer.observe(section);
         })();
