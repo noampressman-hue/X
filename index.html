@@ -13,6 +13,30 @@
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Unbounded:wght@200..900&family=Rubik+Glitch&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="Firstscen.mp4" as="video">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <meta name="theme-color" content="#0a0a0f">
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "#agency",
+          "name": "Agency X",
+          "url": "./",
+          "logo": "./logo.png",
+          "telephone": "+7-000-000-0000",
+          "address": { "@type": "PostalAddress", "addressLocality": "Moscow", "addressCountry": "RU" }
+        },
+        {
+          "@type": "Service",
+          "name": "AI Avatars & Generative Video",
+          "provider": { "@id": "#agency" },
+          "description": "AI avatars, deepfake production and generative video services."
+        }
+      ]
+    }</script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -438,7 +462,7 @@
             <ul class="nav-links">
                 <li><a href="#home">ГЛАВНАЯ</a></li>
                 <li><a href="#services">УСЛУГИ</a></li>
-                <li><a href="#cases">КЕЙСЫ</a></li>
+                <li><a href="#cases">ИДЕИ</a></li>
                 <li><a href="#contact">КОНТАКТЫ</a></li>
             </ul>
             <div class="nav-status">
@@ -524,7 +548,7 @@
                         <span class="btn-bracket">]</span>
                     </a>
                     <a href="#cases" class="btn-secondary">
-                        ПОСМОТРЕТЬ_КЕЙСЫ →
+                        ПОСМОТРЕТЬ_ИДЕИ →
                     </a>
                 </div>
 
@@ -680,7 +704,7 @@
                 <!-- РАЗДЕЛИТЕЛЬ С РУЧКОЙ -->
                 <div class="slider-divider" id="sliderDivider">
                     <div class="slider-handle">
-                        <span class="handle-icon">⟷</span>
+                        <span class="handle-icon">⚡</span>
                     </div>
                 </div>
             </div>
@@ -715,7 +739,9 @@
                     <div class="service-id">PROTOCOL_001</div>
                     <div class="service-status">ACTIVE</div>
                 </div>
-                <div class="service-visual visual-avatars"></div>
+                <div class="service-visual visual-avatars">
+                    <video class="service-preview" src="AI_AVATARS.mp4" muted autoplay loop playsinline controls preload="auto" data-src="AI_AVATARS.mp4"></video>
+                </div>
                 <h3 class="service-title">AI_AVATARS</h3>
                 <p class="service-desc">
                     Создание цифровых двойников с гипер-реалистичной мимикой.
@@ -736,7 +762,9 @@
                     <div class="service-id">PROTOCOL_002</div>
                     <div class="service-status">ACTIVE</div>
                 </div>
-                <div class="service-visual visual-video"></div>
+                <div class="service-visual visual-video">
+                    <video class="service-preview" src="GENERATIVE_VIDEO.mp4" muted autoplay loop playsinline controls preload="auto" data-src="GENERATIVE_VIDEO.mp4"></video>
+                </div>
                 <h3 class="service-title">GENERATIVE_VIDEO</h3>
                 <p class="service-desc">
                     Рекламные ролики без камер и актёров.
@@ -757,7 +785,9 @@
                     <div class="service-id">PROTOCOL_003</div>
                     <div class="service-status">ACTIVE</div>
                 </div>
-                <div class="service-visual visual-scaling"></div>
+                <div class="service-visual visual-scaling">
+                    <video class="service-preview" src="UGC_2.0_SCALING.mp4" muted autoplay loop playsinline controls preload="auto" data-src="UGC_2.0_SCALING.mp4"></video>
+                </div>
                 <h3 class="service-title">UGC_2.0_SCALING</h3>
                 <p class="service-desc">
                     Из одного видео — 1000 вариантов.
@@ -776,41 +806,49 @@
     </section>
 
     <!-- CASES SECTION -->
-    <section id="cases" class="cases-section">
+    <section id="cases" class="cases-section ideas-section">
         <div class="section-header">
             <div class="section-number">03.</div>
-            <h2 class="section-title">РЕАЛИЗОВАННЫЕ_ПРОТОКОЛЫ</h2>
+            <h2 class="section-title">ИДЕИ_ДЛЯ_ЗАПУСКА</h2>
         </div>
 
-        <div class="cases-grid">
-            <article class="case-card" data-case="1">
-                <div class="case-visual" style="background: linear-gradient(45deg, #0044ff, #000);"></div>
+        <div class="idea-generator" data-lang="ru">
+            <div class="generator-screen" id="ideaOutput">01/20 — Аватар основателя записывает 12 коротких обращений под разные сегменты аудитории.</div>
+            <button class="idea-generate-btn" type="button" id="ideaGenerateBtn">ГЕНЕРАЦИЯ</button>
+        </div>
+
+        <div class="cases-grid ideas-grid">
+            <article class="case-card idea-card">
+                <div class="idea-visual idea-avatar has-photo">
+                    <video class="idea-photo" src="AI_AVATARS.mp4" muted autoplay loop playsinline preload="metadata"></video>
+                    <span></span>
+                </div>
                 <div class="case-content">
-                    <div class="case-id">#CASE_091</div>
-                    <h3>NEO_BANK ASSISTANT</h3>
-                    <p>50,000 персонализированных видео для VIP-клиентов. Рост конверсии на 400%.</p>
-                    <button class="case-btn" onclick="openCaseModal(1)">[УЗНАТЬ_БОЛЬШЕ]</button>
+                    <div class="case-id">#IDEA_001</div>
+                    <h3>АВАТАР_ОСНОВАТЕЛЯ</h3>
+                    <p>Один записанный образ превращается в серию обращений для рекламы, лендинга и рассылок.</p>
                 </div>
             </article>
-
-            <article class="case-card" data-case="2">
-                <div class="case-visual"
-                    style="background: repeating-linear-gradient(90deg, #fff, #fff 2px, #eee 2px, #eee 4px);"></div>
+            <article class="case-card idea-card">
+                <div class="idea-visual idea-local has-photo">
+                    <video class="idea-photo" src="GENERATIVE_VIDEO.mp4" muted autoplay loop playsinline preload="metadata"></video>
+                    <span></span>
+                </div>
                 <div class="case-content">
-                    <div class="case-id">#CASE_104</div>
-                    <h3>VIRTUAL FASHION MODEL</h3>
-                    <p>Полностью цифровой инфлюенсер. 1M подписчиков за 3 месяца.</p>
-                    <button class="case-btn" onclick="openCaseModal(2)">[УЗНАТЬ_БОЛЬШЕ]</button>
+                    <div class="case-id">#IDEA_002</div>
+                    <h3>МУЛЬТИЯЗЫЧНЫЙ_ЗАПУСК</h3>
+                    <p>Один ролик адаптируется под RU, EN, ZH и другие рынки с дубляжом и липсинком.</p>
                 </div>
             </article>
-
-            <article class="case-card" data-case="4">
-                <div class="case-visual" style="background: #000;"></div>
+            <article class="case-card idea-card">
+                <div class="idea-visual idea-ugc has-photo">
+                    <video class="idea-photo" src="UGC_2.0_SCALING.mp4" muted autoplay loop playsinline preload="metadata"></video>
+                    <span></span>
+                </div>
                 <div class="case-content">
-                    <div class="case-id">#CASE_202</div>
-                    <h3>DEEPFAKE CEO</h3>
-                    <p>Цифровой клон CEO. Экономия 20 часов времени в месяц.</p>
-                    <button class="case-btn" onclick="openCaseModal(4)">[УЗНАТЬ_БОЛЬШЕ]</button>
+                    <div class="case-id">#IDEA_003</div>
+                    <h3>UGC_ВАРИАЦИИ</h3>
+                    <p>Переключаем пачку готовых направлений: разные хуки, боли, офферы, первые 3 секунды и финальные CTA.</p>
                 </div>
             </article>
         </div>
@@ -850,25 +888,70 @@
     <!-- CONTACT SECTION -->
     <section id="contact" class="contact-section">
         <div class="contact-content">
-            <h2 class="contact-title">ГОТОВЫ_К_ТРАНСФОРМАЦИИ?</h2>
+            <h2 class="contact-title">АНКЕТА_ПРОЕКТА</h2>
             <p class="contact-text">
-                Первая консультация бесплатна. Обсудим ваш проект и<br>
-                покажем возможности AI генерации в действии.
+                Опишите задачу. Мы получим данные, оценим формат<br>
+                и вернёмся с понятным следующим шагом.
             </p>
-            <div class="contact-info">
-                <div class="contact-item contact-email">
-                    <div class="contact-label">EMAIL</div>
-                    <div class="contact-value"></div>
+            <form class="project-form" id="projectForm" data-lang="ru"
+                data-success="Заявка отправлена. Мы свяжемся с вами."
+                data-fallback="Webhook пока не настроен. Откроем письмо с заполненными данными.">
+                <label>
+                    Имя / компания
+                    <input type="text" name="name" autocomplete="name" required placeholder="Как к вам обращаться">
+                </label>
+                <label>
+                    Контакт
+                    <input type="text" name="contact" autocomplete="email" required placeholder="Email / Telegram / WhatsApp">
+                </label>
+                <label>
+                    Тип проекта
+                    <select name="projectType" required>
+                        <option value="">Выберите</option>
+                        <option>AI avatar</option>
+                        <option>Generative video</option>
+                        <option>UGC scaling</option>
+                        <option>Локализация / дубляж</option>
+                        <option>Другое</option>
+                    </select>
+                </label>
+                <label>
+                    Бюджет
+                    <select name="budget" required>
+                        <option value="">Выберите</option>
+                        <option>до $500</option>
+                        <option>$500-2,000</option>
+                        <option>$2,000-5,000</option>
+                        <option>$5,000+</option>
+                    </select>
+                </label>
+                <label>
+                    Срок
+                    <select name="timeline" required>
+                        <option value="">Выберите</option>
+                        <option>24-48 часов</option>
+                        <option>1 неделя</option>
+                        <option>2-4 недели</option>
+                        <option>Пока изучаю варианты</option>
+                    </select>
+                </label>
+                <label>
+                    Где использовать
+                    <input type="text" name="placement" placeholder="Reels, TikTok, ads, сайт, презентация">
+                </label>
+                <label class="form-wide">
+                    Что нужно сделать
+                    <textarea name="message" required placeholder="Опишите задачу, референсы, количество видео, языки, аватаров и ограничения"></textarea>
+                </label>
+                <label class="form-wide form-consent">
+                    <input type="checkbox" name="consent" required>
+                    <span>Согласен на обработку данных для ответа по проекту.</span>
+                </label>
+                <div class="form-actions">
+                    <button class="project-submit" type="submit">НАЧАТЬ_ПРОЕКТ</button>
+                    <div class="form-status" id="projectFormStatus" aria-live="polite"></div>
                 </div>
-                <div class="contact-item contact-telegram">
-                    <div class="contact-label">TELEGRAM</div>
-                    <div class="contact-value"></div>
-                </div>
-                <div class="contact-item contact-location">
-                    <div class="contact-label">LOCATION</div>
-                    <div class="contact-value"></div>
-                </div>
-            </div>
+            </form>
 
             <!-- Пользовательское соглашение -->
 
@@ -886,12 +969,6 @@
                         →</a>
                 </div>
             </div>
-
-            <a href="mailto:noam.pressman@gmail.com" class="btn-contact">
-                <span class="btn-bracket">[</span>
-                СВЯЗАТЬСЯ_С_НАМИ
-                <span class="btn-bracket">]</span>
-            </a>
         </div>
     </section>
 
@@ -964,8 +1041,19 @@
             const navLinks = document.querySelector('.nav-links');
 
             if (burger && navLinks) {
+                // Click event
                 burger.addEventListener('click', function () {
-                    this.classList.toggle('active');
+                    toggleMenu();
+                });
+
+                // Touch event for mobile
+                burger.addEventListener('touchend', function (e) {
+                    e.preventDefault();
+                    toggleMenu();
+                });
+
+                function toggleMenu() {
+                    burger.classList.toggle('active');
                     navLinks.classList.toggle('active');
 
                     if (navLinks.classList.contains('active')) {
@@ -975,25 +1063,46 @@
                         document.body.style.overflow = '';
                         document.body.style.touchAction = '';
                     }
-                });
+                }
 
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', function () {
-                        burger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        document.body.style.overflow = '';
-                        document.body.style.touchAction = '';
+                        closeMenu();
+                    });
+
+                    link.addEventListener('touchend', function () {
+                        closeMenu();
                     });
                 });
 
+                function closeMenu() {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                    document.body.style.touchAction = '';
+                }
+
                 document.addEventListener('click', function (e) {
                     if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
-                        burger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        document.body.style.overflow = '';
-                        document.body.style.touchAction = '';
+                        closeMenu();
                     }
                 });
+
+                // Close menu on swipe down
+                let touchStartY = 0;
+                navLinks.addEventListener('touchstart', function (e) {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+
+                navLinks.addEventListener('touchmove', function (e) {
+                    const touchY = e.touches[0].clientY;
+                    const diff = touchY - touchStartY;
+
+                    // Если свайп вниз и мы в начале - закрыть меню
+                    if (diff > 100 && navLinks.scrollTop <= 0) {
+                        closeMenu();
+                    }
+                }, { passive: true });
             }
         })();
 
@@ -1001,21 +1110,27 @@
         function openAgreementModal(event) {
             if (event) event.preventDefault();
             const modal = document.getElementById('agreementModal');
+            if (!modal) return;
+
             modal.style.display = 'flex';
             // Небольшая задержка для срабатывания transition
             requestAnimationFrame(() => {
                 modal.classList.add('show');
             });
             document.body.style.overflow = 'hidden';
+            document.body.style.touchAction = 'none';
         }
 
         function closeAgreementModal() {
             const modal = document.getElementById('agreementModal');
+            if (!modal) return;
+
             modal.classList.remove('show');
             // Ждём окончания анимации перед скрытием
             setTimeout(() => {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = '';
+                document.body.style.touchAction = '';
             }, 300);
         }
 
@@ -1025,6 +1140,10 @@
             if (checkbox) {
                 checkbox.checked = true;
             }
+
+            // Сохраняем, что пользователь принял соглашение
+            localStorage.setItem('agreementAccepted', 'true');
+
             // Закрыть модалку с анимацией
             closeAgreementModal();
             // Показать toast подтверждения
@@ -1080,6 +1199,19 @@
 
         // Показать toast при загрузке страницы
         document.addEventListener('DOMContentLoaded', showPrivacyToast);
+
+        // ===== MOBILE: SHOW AGREEMENT MODAL ON FIRST VISIT =====
+        (function () {
+            const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+            const hasAccepted = localStorage.getItem('agreementAccepted');
+
+            // На мобильных показываем соглашение сразу при первом визите
+            if (isMobile && !hasAccepted) {
+                setTimeout(() => {
+                    openAgreementModal();
+                }, 500);
+            }
+        })();
 
         // Данные кейсов
         const casesData = {
@@ -1262,6 +1394,36 @@
             }
         });
 
+        // Swipe to close on mobile for agreement modal
+        (function () {
+            const modal = document.getElementById('agreementModal');
+            if (!modal) return;
+
+            let touchStartY = 0;
+            let touchEndY = 0;
+            const modalContent = modal.querySelector('.agreement-modal-content');
+
+            // Только для мобильных устройств
+            const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+            if (!isMobile) return;
+
+            modal.addEventListener('touchstart', function (e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            modal.addEventListener('touchmove', function (e) {
+                touchEndY = e.touches[0].clientY;
+            }, { passive: true });
+
+            modal.addEventListener('touchend', function (e) {
+                const diff = touchEndY - touchStartY;
+                // Если свайп вниз больше 100px и мы в начале контента
+                if (diff > 100 && modalContent.scrollTop <= 0) {
+                    closeAgreementModal();
+                }
+            }, { passive: true });
+        })();
+
         // ===== ИНТЕРАКТИВНЫЙ СЛАЙДЕР СРАВНЕНИЯ =====
         (function () {
             const slider = document.querySelector('.comparison-slider');
@@ -1271,9 +1433,11 @@
 
             if (!slider || !divider) return;
 
-            // Проверка: мобильное устройство — отключаем слайдер
-            const isMobile = window.innerWidth <= 768;
-            if (isMobile) return; // На мобильных используем табы, слайдер не нужен
+            // Проверка: десктоп или мобильный по ширине экрана
+            const isDesktop = window.innerWidth > 768;
+
+            // На мобильных не используем слайдер вообще - только табы
+            if (!isDesktop) return;
 
             let isDragging = false;
             let autoSlideInterval;
@@ -1349,11 +1513,6 @@
             document.addEventListener('mousemove', drag);
             document.addEventListener('mouseup', stopDrag);
 
-            // События касания
-            divider.addEventListener('touchstart', startDrag, { passive: false });
-            document.addEventListener('touchmove', drag, { passive: false });
-            document.addEventListener('touchend', stopDrag);
-
             // Запустить автопереключение при загрузке
             setSliderPosition(50);
             setTimeout(startAutoSlide, 2000);
@@ -1370,21 +1529,32 @@
 
             if (tabBtns.length && sliderContainer) {
                 tabBtns.forEach(btn => {
+                    // Click event
                     btn.addEventListener('click', function () {
-                        // Убрать active у всех
-                        tabBtns.forEach(b => b.classList.remove('active'));
-                        // Добавить active на текущую
-                        this.classList.add('active');
+                        switchTab(this);
+                    });
 
-                        // Переключить видимость
-                        const tab = this.getAttribute('data-tab');
-                        if (tab === 'with') {
-                            sliderContainer.classList.add('showing-with');
-                        } else {
-                            sliderContainer.classList.remove('showing-with');
-                        }
+                    // Touch events for mobile
+                    btn.addEventListener('touchend', function (e) {
+                        e.preventDefault();
+                        switchTab(this);
                     });
                 });
+            }
+
+            function switchTab(activeBtn) {
+                // Убрать active у всех
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Добавить active на текущую
+                activeBtn.classList.add('active');
+
+                // Переключить видимость
+                const tab = activeBtn.getAttribute('data-tab');
+                if (tab === 'with') {
+                    sliderContainer.classList.add('showing-with');
+                } else {
+                    sliderContainer.classList.remove('showing-with');
+                }
             }
         })();
 
@@ -1414,6 +1584,13 @@
                 'FIFTHSCEN.mp4'
             ];
 
+            const trailerTiming = {
+                videoVisibleMs: 850,
+                videoFadeMs: 220,
+                betweenClipsMs: 260,
+                loopPauseMs: 2200
+            };
+
             const section = document.getElementById('fastTrailer');
             const phraseEl = document.getElementById('trailerPhrase');
             const recordingOverlay = document.getElementById('recordingOverlay');
@@ -1421,14 +1598,15 @@
 
             const videoWrapper = document.createElement('div');
             videoWrapper.className = 'trailer-video-wrapper';
-            videoWrapper.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.05s;z-index:1;pointer-events:none;';
-            videoWrapper.innerHTML = '<video muted playsinline style="max-width:80%;max-height:80%;object-fit:contain;"></video>';
+            videoWrapper.style.cssText = `position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity ${trailerTiming.videoFadeMs}ms ease-out;z-index:1;pointer-events:none;`;
+            videoWrapper.innerHTML = '<video muted playsinline style="width:min(92vw,1280px);height:min(70vh,720px);object-fit:cover;"></video>';
             section.appendChild(videoWrapper);
 
             const videoEl = videoWrapper.querySelector('video');
 
             let currentIndex = 0;
             let started = false;
+            let lastVideoIndex = -1;
 
             function showNext() {
                 if (!started) return;
@@ -1444,8 +1622,12 @@
                 videoWrapper.style.opacity = '0';
 
                 setTimeout(() => {
-                    const randomVideo = videoFiles[Math.floor(Math.random() * videoFiles.length)];
-                    videoEl.src = randomVideo;
+                    let nextVideoIndex = Math.floor(Math.random() * videoFiles.length);
+                    if (videoFiles.length > 1 && nextVideoIndex === lastVideoIndex) {
+                        nextVideoIndex = (nextVideoIndex + 1) % videoFiles.length;
+                    }
+                    lastVideoIndex = nextVideoIndex;
+                    videoEl.src = videoFiles[nextVideoIndex];
                     videoEl.currentTime = 0;
                     videoEl.play().catch(() => { });
 
@@ -1462,12 +1644,12 @@
                                 setTimeout(() => {
                                     currentIndex = 0;
                                     showNext();
-                                }, 2000);
+                                }, trailerTiming.loopPauseMs);
                             } else {
                                 showNext();
                             }
-                        }, 200);
-                    }, 300);
+                        }, trailerTiming.betweenClipsMs);
+                    }, trailerTiming.videoVisibleMs);
                 }, phrase.duration);
             }
 
@@ -1505,12 +1687,13 @@
             let fadeInterval;
             let userMuted = false;
             let userTargetVol = 0.7;
+            let isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
 
             function setVolume(vol) {
                 clearInterval(fadeInterval);
-                audio.volume = vol;
-                slider.value = Math.round(vol * 100);
-                valueDisplay.textContent = Math.round(vol * 100) + '%';
+                audio.volume = Math.max(0, Math.min(1, vol));
+                slider.value = Math.round(audio.volume * 100);
+                valueDisplay.textContent = Math.round(audio.volume * 100) + '%';
                 updateMuteIcon();
             }
 
@@ -1522,10 +1705,11 @@
                 const direction = targetVol > currentVol ? 1 : -1;
 
                 fadeInterval = setInterval(() => {
-                    audio.volume += direction * step;
-                    if ((direction > 0 && audio.volume >= targetVol) ||
-                        (direction < 0 && audio.volume <= targetVol)) {
-                        audio.volume = targetVol;
+                    const nextVol = Math.max(0, Math.min(1, audio.volume + direction * step));
+                    audio.volume = nextVol;
+                    if ((direction > 0 && nextVol >= targetVol) ||
+                        (direction < 0 && nextVol <= targetVol)) {
+                        audio.volume = Math.max(0, Math.min(1, targetVol));
                         clearInterval(fadeInterval);
                     }
                     slider.value = Math.round(audio.volume * 100);
@@ -1562,6 +1746,25 @@
                 setVolume(vol);
             });
 
+            // Touch events for mobile
+            slider.addEventListener('touchstart', function (e) {
+                e.stopPropagation();
+            }, { passive: true });
+
+            slider.addEventListener('touchmove', function (e) {
+                e.stopPropagation();
+            }, { passive: true });
+
+            muteBtn.addEventListener('touchend', function (e) {
+                e.preventDefault();
+                userMuted = !userMuted;
+                if (userMuted) {
+                    setVolume(0);
+                } else {
+                    setVolume(userTargetVol);
+                }
+            });
+
             // Track section visibility
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1586,13 +1789,55 @@
                 setTimeout(() => {
                     if (!userMuted && userTargetVol > 0) {
                         audio.volume = 0;
-                        audio.play().catch(() => {
-                            document.addEventListener('click', function startAudio() {
-                                audio.play().catch(() => { });
-                                document.removeEventListener('click', startAudio);
-                            }, { once: true });
-                        });
-                        fadeTo(userTargetVol);
+
+                        // On mobile, wait for user interaction
+                        if (isMobile) {
+                            // Show a prompt to tap for audio
+                            const tapPrompt = document.createElement('div');
+                            tapPrompt.style.cssText = `
+                                position: absolute;
+                                bottom: 100px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                background: rgba(0, 0, 0, 0.8);
+                                color: #fff;
+                                padding: 10px 20px;
+                                border-radius: 5px;
+                                font-family: var(--font-mono);
+                                font-size: 0.8rem;
+                                z-index: 15;
+                                pointer-events: none;
+                                animation: fadeInOut 3s ease-in-out;
+                            `;
+                            tapPrompt.textContent = 'Нажмите для включения звука';
+                            section.appendChild(tapPrompt);
+
+                            // Wait for any touch/click to start audio
+                            const startOnTouch = () => {
+                                audio.play().then(() => {
+                                    fadeTo(userTargetVol);
+                                    // Remove prompt
+                                    if (tapPrompt.parentNode) {
+                                        tapPrompt.parentNode.removeChild(tapPrompt);
+                                    }
+                                }).catch(e => console.log('Audio still blocked:', e));
+
+                                document.removeEventListener('touchstart', startOnTouch);
+                                document.removeEventListener('click', startOnTouch);
+                            };
+
+                            document.addEventListener('touchstart', startOnTouch, { once: true });
+                            document.addEventListener('click', startOnTouch, { once: true });
+                        } else {
+                            // Desktop - try to play immediately
+                            audio.play().catch(() => {
+                                document.addEventListener('click', function startAudio() {
+                                    audio.play().catch(() => { });
+                                    document.removeEventListener('click', startAudio);
+                                }, { once: true });
+                            });
+                            fadeTo(userTargetVol);
+                        }
                     }
                 }, 1500);
             }
@@ -1609,6 +1854,328 @@
         })();
     </script>
 
+
+<!-- Added: AOS, VanillaTilt, tsParticles, lazy-load previews, sticky CTA, exit-intent, Telegram quick chat, SW registration -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  (function(){
+    const section = document.getElementById('fastTrailer');
+    if(section){
+      const p = document.createElement('div'); p.id='tsparticles'; p.style.cssText='position:absolute;inset:0;z-index:0;pointer-events:none;'; section.insertBefore(p, section.firstChild);
+      if(window.tsParticles){
+        tsParticles.load('tsparticles', {
+          particles: { number:{value:60}, color:{value:'#0044ff'}, links:{enable:true, color:'#0044ff', distance:150}, move:{direction:'none', speed:1}, shape:{type:'circle'}, opacity:{value:0.7}},
+          detectRetina: true
+        }).catch(()=>{});
+      }
+    }
+  })();
+
+  try{ if(window.VanillaTilt){ VanillaTilt.init(document.querySelectorAll('.service-card'), { max:12, speed:400, glare:true, 'max-glare':0.12 }); } }catch(e){}
+
+  (function(){
+    const vids = document.querySelectorAll('video.service-preview');
+    if(!('IntersectionObserver' in window) || !vids.length) return;
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const v = entry.target;
+        if(entry.isIntersecting){
+          if(!v.src && v.dataset.src){ v.src = v.dataset.src; try{ v.load(); v.play().catch(()=>{}); }catch(e){} }
+        } else {
+          try{ v.pause(); }catch(e){}
+        }
+      });
+    }, {threshold:0.5});
+    vids.forEach(v=>io.observe(v));
+  })();
+
+  (function(){
+    const divider = document.getElementById('sliderDivider');
+    const leftCards = document.querySelectorAll('.left-side .comparison-card');
+    const rightCards = document.querySelectorAll('.right-side .comparison-card');
+    if(!divider) return;
+    setInterval(()=>{
+      const left = parseFloat(getComputedStyle(divider).left) || 50;
+      const percent = left;
+      leftCards.forEach((c)=>{ c.style.opacity = (1 - percent/120).toString(); c.style.transform = `translateX(${-(percent-50)/8}px)`; });
+      rightCards.forEach((c)=>{ c.style.opacity = (0.5 + percent/200).toString(); c.style.transform = `translateX(${(percent-50)/8}px)`; });
+    },60);
+  })();
+
+  (function(){
+    const btn = document.createElement('a');
+    btn.id='stickyCTA';
+    btn.className='sticky-cta btn-primary';
+    btn.href='#contact';
+    btn.textContent='НАЧАТЬ_ПРОЕКТ';
+    Object.assign(btn.style,{position:'fixed',right:'20px',bottom:'20px',display:'none',zIndex: 9999,padding:'0.85rem 1rem',borderRadius:'8px'});
+    document.body.appendChild(btn);
+    window.addEventListener('scroll', ()=> {
+      if(window.scrollY > window.innerHeight*0.5) btn.style.display='block'; else btn.style.display='none';
+    });
+  })();
+
+  (function(){
+    if(sessionStorage.getItem('exitShown')) return;
+    let shown=false;
+    const popup = document.createElement('div');
+    popup.id='exitPopup';
+    popup.style.cssText='position:fixed;z-index:4000;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);';
+    popup.innerHTML='<div style="background:#fff;padding:2rem;max-width:520px;border:4px solid #0044ff;">\
+      <h3>Подождите! Получите чек-лист</h3>\
+      <p>5 способов сэкономить на видео-продакшене — бесплатно.</p>\
+      <a href="#contact" class="btn-primary" onclick="document.body.removeChild(pop);">Получить</a>\
+      <button id="exitClose" style="margin-left:1rem;padding:0.6rem 1rem;">Закрыть</button>\
+    </div>';
+    let pop = null;
+    document.addEventListener('mouseleave', (e)=>{ if(e.clientY <= 0 && !shown && !sessionStorage.getItem('exitShown')){ shown=true; sessionStorage.setItem('exitShown','1'); document.body.appendChild(popup); pop=popup; document.getElementById('exitClose').addEventListener('click', ()=>{ if(pop) document.body.removeChild(pop); }); }});
+  })();
+
+  (function(){
+    const a = document.createElement('a');
+    a.href='mailto:noam.pressman@gmail.com';
+    a.target='_blank';
+    a.className='tg-chat';
+  a.textContent='X';
+    a.style.cssText='position:fixed;right:20px;bottom:90px;z-index:9999;background:#0044ff;color:#fff;padding:10px;border-radius:50%;font-weight:900;text-decoration:none;box-shadow:0 8px 30px rgba(0,0,0,0.2);';
+    document.body.appendChild(a);
+  })();
+
+  if(window.AOS) AOS.init({once:true,duration:700,offset:100});
+
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
+        
+        // ===== SERVICES VIDEO + IDEA GENERATOR =====
+        (function () {
+            const serviceVideos = document.querySelectorAll('video.service-preview, video.idea-photo');
+            const serviceVideoObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) entry.target.play().catch(() => {});
+                });
+            }, { threshold: 0.35 });
+
+            serviceVideos.forEach((video) => {
+                if (!video.getAttribute('src') && video.dataset.src) video.src = video.dataset.src;
+                video.muted = true;
+                video.loop = true;
+                video.playsInline = true;
+                const play = () => { video.muted = true; video.play().catch(() => {}); };
+                if (video.readyState >= 2) play();
+                video.addEventListener('loadeddata', play, { once: true });
+                const videoCard = video.closest('.service-card') || video.closest('.idea-card');
+                videoCard?.addEventListener('mouseenter', play);
+                videoCard?.addEventListener('mousemove', play, { once: true });
+                videoCard?.addEventListener('click', play);
+                videoCard?.addEventListener('touchstart', play, { passive: true });
+                serviceVideoObserver.observe(video);
+            });
+
+            const output = document.getElementById('ideaOutput');
+            const button = document.getElementById('ideaGenerateBtn');
+            if (!output || !button) return;
+
+            const lang = document.querySelector('.idea-generator')?.dataset.lang || 'ru';
+            const ideas = {
+                ru: [
+                    '01/20 — Аватар основателя записывает 12 коротких обращений под разные сегменты аудитории.',
+                    '02/20 — Один UGC-ролик разбирается на 30 хуков для недельного теста рекламы.',
+                    '03/20 — Запуск продукта выходит на RU, EN и ZH с дубляжом и точным липсинком.',
+                    '04/20 — Цифровой эксперт отвечает на возражения клиентов в коротких вертикальных видео.',
+                    '05/20 — Видео-питч для инвесторов собирается в версиях под разные отрасли.',
+                    '06/20 — HR-команда получает аватар-рекрутера для приветствий и онбординга.',
+                    '07/20 — Бренд делает серию сезонных роликов без повторной съемки команды.',
+                    '08/20 — Онлайн-школа превращает лектора в набор коротких промо для каждого курса.',
+                    '09/20 — E-commerce запускает видео-карточки товаров с разными офферами и CTA.',
+                    '10/20 — Ресторан делает локальные приглашения под районы, события и время дня.',
+                    '11/20 — Недвижимость показывает один объект в форматах для инвесторов, семей и арендаторов.',
+                    '12/20 — Финтех объясняет сложный продукт простыми видео для разных уровней аудитории.',
+                    '13/20 — Медиа-команда выпускает новостные дайджесты с постоянным цифровым ведущим.',
+                    '14/20 — B2B-продажи получают персональные видео для холодных и теплых лидов.',
+                    '15/20 — Ивент-промо меняет ведущего, язык и оффер под разные площадки.',
+                    '16/20 — Служба поддержки отвечает видео-инструкциями на частые вопросы клиентов.',
+                    '17/20 — Fashion-бренд тестирует разные стили модели, фон и подачу коллекции.',
+                    '18/20 — Приложение делает короткие onboarding-видео под разные сценарии использования.',
+                    '19/20 — Агентство готовит 20 креативных углов для одного рекламного спринта.',
+                    '20/20 — Личный бренд выпускает еженедельные обращения без новой студийной съемки.'
+                ],
+                en: [
+                    '01/20 - Founder avatar records 12 short video angles for different audience segments.',
+                    '02/20 - One UGC clip is split into 30 hooks for a one-week ad test.',
+                    '03/20 - Product launch ships in RU, EN, and ZH with dubbing and synced lip movement.',
+                    '04/20 - Digital expert answers customer objections in short vertical videos.',
+                    '05/20 - Investor pitch video is prepared in versions for different industries.',
+                    '06/20 - HR team gets an avatar recruiter for welcome and onboarding videos.',
+                    '07/20 - Brand releases seasonal clips without filming the team again.',
+                    '08/20 - Online school turns one lecturer into short promos for every course.',
+                    '09/20 - E-commerce launches product video cards with different offers and CTAs.',
+                    '10/20 - Restaurant makes local invites by district, event, and time of day.',
+                    '11/20 - Real estate presents one property for investors, families, and renters.',
+                    '12/20 - Fintech explains a complex product in simple videos for different audiences.',
+                    '13/20 - Media team publishes news digests with a consistent digital host.',
+                    '14/20 - B2B sales gets personal videos for cold and warm leads.',
+                    '15/20 - Event promo changes host, language, and offer for different venues.',
+                    '16/20 - Support team answers common questions with short video instructions.',
+                    '17/20 - Fashion brand tests model style, background, and collection angle.',
+                    '18/20 - App creates onboarding videos for different user scenarios.',
+                    '19/20 - Agency prepares 20 creative angles for one ad sprint.',
+                    '20/20 - Personal brand publishes weekly messages without a new studio shoot.'
+                ],
+                zh: [
+                    '01/20 - 创始人数字形象为不同受众准备 12 条短视频表达。',
+                    '02/20 - 一条 UGC 视频拆成 30 个广告开头，用于一周创意测试。',
+                    '03/20 - 产品发布视频适配 RU、EN、ZH，并完成配音和口型同步。',
+                    '04/20 - 数字专家用短视频回应客户常见疑问。',
+                    '05/20 - 投资人视频介绍按不同行业准备多个版本。',
+                    '06/20 - HR 团队使用数字招聘官完成欢迎和入职视频。',
+                    '07/20 - 品牌无需再次拍摄团队，也能发布季节性短片。',
+                    '08/20 - 在线教育把一位讲师变成每门课程的短宣传视频。',
+                    '09/20 - 电商为商品卡片准备不同卖点和行动号召。',
+                    '10/20 - 餐厅按区域、活动和时间段制作本地邀请视频。',
+                    '11/20 - 房地产项目面向投资人、家庭和租客展示不同版本。',
+                    '12/20 - 金融科技用简单视频解释复杂产品。',
+                    '13/20 - 媒体团队用固定数字主持人发布新闻摘要。',
+                    '14/20 - B2B 销售为冷线索和暖线索准备个性化视频。',
+                    '15/20 - 活动宣传按场地更换主持人、语言和报价。',
+                    '16/20 - 客服团队用短视频说明常见问题。',
+                    '17/20 - 时尚品牌测试不同模特风格、背景和系列表达。',
+                    '18/20 - 应用为不同使用场景准备 onboarding 视频。',
+                    '19/20 - 代理商为一个广告冲刺准备 20 个创意角度。',
+                    '20/20 - 个人品牌无需新棚拍也能发布每周视频。'
+                ]
+            };
+            const list = ideas[lang] || ideas.ru;
+            const buttonLabels = {
+                ru: { ready: 'ГЕНЕРАЦИЯ', loading: 'ГЕНЕРАЦИЯ...' },
+                en: { ready: 'GENERATE', loading: 'GENERATING...' },
+                zh: { ready: '生成', loading: '生成中...' }
+            };
+            const labels = buttonLabels[lang] || buttonLabels.ru;
+            let index = 0;
+            output.textContent = list[index];
+            button.textContent = labels.ready;
+            button.setAttribute('aria-label', labels.ready);
+            button.addEventListener('click', () => {
+                if (button.disabled) return;
+                button.disabled = true;
+                button.textContent = labels.loading;
+                output.classList.add('is-generating');
+                const finalIndex = (index + 1) % list.length;
+                let ticks = 0;
+                const interval = window.setInterval(() => {
+                    const previewIndex = (index + ticks + 1) % list.length;
+                    output.textContent = list[previewIndex];
+                    ticks += 1;
+                    if (ticks < 5) return;
+                    window.clearInterval(interval);
+                    index = finalIndex;
+                    output.textContent = list[index];
+                    output.classList.remove('is-generating');
+                    button.textContent = labels.ready;
+                    button.disabled = false;
+                }, 115);
+            });
+        })();
+// ===== PROJECT FORM SUBMIT =====
+        (function () {
+            const form = document.getElementById('projectForm');
+            if (!form) return;
+
+            const status = document.getElementById('projectFormStatus');
+            const webhookUrl = window.AGENCY_X_WEBHOOK_URL || '';
+            const leadEmail = 'noam.pressman@gmail.com';
+
+            function setStatus(message, isError) {
+                if (!status) return;
+                status.textContent = message;
+                status.style.color = isError ? '#ffffff' : '#f0f4f8';
+            }
+
+            function buildPayload() {
+                const data = Object.fromEntries(new FormData(form).entries());
+                return {
+                    source: 'AGENCY_X_VERSION_7',
+                    lang: form.dataset.lang || document.documentElement.lang || 'ru',
+                    page: window.location.href,
+                    submittedAt: new Date().toISOString(),
+                    name: data.name || '',
+                    contact: data.contact || '',
+                    projectType: data.projectType || '',
+                    budget: data.budget || '',
+                    timeline: data.timeline || '',
+                    placement: data.placement || '',
+                    message: data.message || '',
+                    consent: data.consent === 'on'
+                };
+            }
+
+            function payloadToMail(payload) {
+                const lines = [
+                    'New Agency X project request',
+                    '',
+                    'Name / company: ' + payload.name,
+                    'Contact: ' + payload.contact,
+                    'Project type: ' + payload.projectType,
+                    'Budget: ' + payload.budget,
+                    'Timeline: ' + payload.timeline,
+                    'Placement: ' + payload.placement,
+                    'Message: ' + payload.message,
+                    'Language: ' + payload.lang,
+                    'Page: ' + payload.page,
+                    'Submitted: ' + payload.submittedAt
+                ];
+                return 'mailto:' + leadEmail + '?subject=' + encodeURIComponent('Agency X project request') + '&body=' + encodeURIComponent(lines.join('\n'));
+            }
+
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                if (!form.reportValidity()) return;
+
+                const payload = buildPayload();
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (submitButton) submitButton.disabled = true;
+                setStatus('SENDING...', false);
+
+                if (webhookUrl) {
+                    try {
+                        const response = await fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (!response.ok) throw new Error('Webhook failed: ' + response.status);
+                        form.reset();
+                        setStatus(form.dataset.success || 'Sent.', false);
+                        return;
+                    } catch (error) {
+                        setStatus('Webhook error. Opening email fallback...', true);
+                    } finally {
+                        if (submitButton) submitButton.disabled = false;
+                    }
+                } else {
+                    setStatus(form.dataset.fallback || 'Opening email fallback...', false);
+                    if (submitButton) submitButton.disabled = false;
+                }
+
+                window.location.href = payloadToMail(payload);
+            });
+        })();</script>
+
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
